@@ -87,7 +87,7 @@ namespace :srt do
 
   SRT_FILE_NAME = "how-it-works-2"
   SRT_SAVE_FOLDER = 'how_subtitles_2'
-  LOCALES = [:en, :el]
+  LOCALES = [:en, :el, :de, :sv]
 
   VIDEO_TEMPLATE = {
     'demo_video_2.t1' => '00:00:00,500 --> 00:00:07,800',

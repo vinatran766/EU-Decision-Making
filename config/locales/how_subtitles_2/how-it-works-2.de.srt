@@ -1,0 +1,131 @@
+1
+00:00:00,500 --> 00:00:07,800
+Loomio ist ein benutzerfreundliches Online-Tool um gemeinschaftlich 
+Entscheidungen zu treffen. So funktioniert's.
+
+2
+00:00:07,800 --> 00:00:13,400
+Ich stehe vor einer Entscheidung, die ich mit einer Gruppe von Leuten treffen möchte.
+Loomio vereinfacht diesen Prozess.
+
+3
+00:00:13,400 --> 00:00:17,400
+Ich benenne die Diskussion und 
+lade die benötigten Leute ein.
+
+4
+00:00:17,400 --> 00:00:25,000
+Es ist wirklich einfach. Nicht einmal ein Benutzerkonto wird benötigt. Diskussionen auf Loomio können öffentlich oder privat sein.
+
+5
+00:00:25,000 --> 00:00:29,900
+Da es online ist, können verschiedenste Leute 
+von überall aus teilnehmen, zu jeder beliebigen Zeit.
+
+6
+00:00:29,900 --> 00:00:36,300
+Von allen werden relevante Informationen zusammengetragen um ein gemeinsames Verständnis aufzubauen. Jeder kann eine Lösung vorschlagen.
+
+7
+00:00:36,300 --> 00:00:43,600
+Innerhalb der Vorschlagsphase erhält jeder die Gelegenheit, seine Meinung zu äußern und zu erklären, warum er sie für ideal hält.
+
+8
+00:00:43,600 --> 00:00:49,300
+Das streicht die wichtigsten Argumente zusammenfassend heraus, 
+damit sich neue Teilnehmer schnell einen Überblick verschaffen können.
+
+9
+00:00:49,300 --> 00:00:53,300
+Das starke Argument dieses Teilnehmers bringt jeden zum Überlegen.
+
+10
+00:00:53,300 --> 00:00:57,200
+Da neue Informationen vorhanden sind, kann die eigene Meinung geändert werden.
+
+11
+00:00:57,200 --> 00:01:05,200
+Manchmal ist es notwendig, dass ein früherer Vorschlag abgelehnt wird, um den Weg für einen neuen zu ebnen, der alle glücklich macht.
+
+12
+00:01:05,200 --> 00:01:10,800
+Großartige Ideen können von überall kommen.
+Keiner kennt alle Möglichkeiten von Anfang an.
+
+13
+00:01:10,800 --> 00:01:16,500
+Da die Ideen gemeinschaftlich entstehen, werden 
+getroffene Entscheidungen auch von allen zusammen getragen.
+
+14
+00:01:16,500 --> 00:01:22,200
+Die ganze Gruppe wird über das Ergebnis informiert und 
+kann damit beginnen, entsprechende Aktionen einzuleiten.
+
+15
+00:01:22,200 --> 00:01:27,400
+Wenn viele Entscheidungen mit den selben Leuten getroffen werden, 
+kann Loomio zum Zuhause für die ganze Gruppe werden.
+
+16
+00:01:27,400 --> 00:01:33,000
+Alle Entscheidungsprozesse werden laufend archiviert und können jederzeit eingesehen werden.
+
+17
+00:01:33,000 --> 00:01:35,900
+Tausende Leute sind von Loomio bereits überzeugt.
+
+18
+00:01:35,900 --> 00:01:41,000
+Sie sind offener und benötigen weniger Zeit 
+und Energie, um an bessere Lösungen zu kommen.
+
+19
+00:01:41,000 --> 00:01:44,900
+Stellen Sie sich vor, Loomio an Ihrem Arbeitsplatz und in Ihrem Umfeld einzusetzen.
+
+20
+00:01:44,900 --> 00:01:50,100
+Loomio ist als freie Software Open Source und wird das auch immer bleiben.
+
+21
+00:01:50,100 --> 00:01:53,200
+Derzeit bauen wir an der nächsten Version von Loomio.
+
+22
+00:01:53,200 --> 00:01:57,200
+Da es mobil ist, wird es auf Ihrem Handy und anderen mobilen Geräten laufen.
+
+23
+00:01:57,200 --> 00:01:59,900
+Geeignet für für Anfänger, als auch für Profis.
+
+24
+00:01:59,900 --> 00:02:03,400
+Sicher, da Sie die Kontrolle über Ihre Daten behalten.
+
+25
+00:02:03,400 --> 00:02:07,100
+Das beste ist aber, dass Loomio 1.0 wirklich einfach zu bedienen ist.
+
+26
+00:02:07,100 --> 00:02:12,300
+Ein komplett neues Loomio für wahrhaft offene Entscheidungsfindung.
+
+27
+00:02:12,500 --> 00:02:15,300
+Genau dafür benöten wir jetzt Ihre Hilfe.
+
+28
+00:02:15,300 --> 00:02:20,000
+Wir begrüßen freiwillige Spenden und möchten Loomio 1.0 via Crowdfunding finanzieren.
+
+29
+00:02:20,000 --> 00:02:24,000
+Unterstützen Sie uns, damit wir der Welt etwas Einzigartiges zurückgeben können.
+
+30
+00:02:24,000 --> 00:02:32,000
+Mit Loomio kann jeder auf einfache Art eingebunden werden
+damit wir alle gemeinsam großartige Entscheidungen treffen können.
+
