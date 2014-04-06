@@ -65,15 +65,15 @@ kann damit beginnen, entsprechende Aktionen einzuleiten.
 15
 00:01:22,200 --> 00:01:27,400
 Wenn viele Entscheidungen mit den selben Leuten getroffen werden, 
-kann Loomio zum Zuhause für die ganze Gruppe werden.
+kann Loomio zum Online-Zuhause für die ganze Gruppe werden.
 
 16
 00:01:27,400 --> 00:01:33,000
-Alle Entscheidungsprozesse werden laufend archiviert und können jederzeit eingesehen werden.
+Alle Entscheidungsprozesse werden laufend archiviert und können jederzeit von allen eingesehen werden.
 
 17
 00:01:33,000 --> 00:01:35,900
-Tausende Leute sind von Loomio bereits überzeugt.
+Tausende Leute sind bereits von Loomio überzeugt.
 
 18
 00:01:35,900 --> 00:01:41,000
@@ -114,7 +114,7 @@ Ein komplett neues Loomio für wahrhaft offene Entscheidungsfindung.
 
 27
 00:02:12,500 --> 00:02:15,300
-Genau dafür benöten wir jetzt Ihre Hilfe.
+Genau dafür benötigen wir jetzt Ihre Hilfe.
 
 28
 00:02:15,300 --> 00:02:20,000

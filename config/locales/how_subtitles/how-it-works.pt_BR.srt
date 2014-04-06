@@ -4,7 +4,7 @@ Loomio é uma simples ferramenta on-line de fácil utilização para colaboraç�
 
 2
 00:00:05,000 --> 00:00:09,700
-Ele fornece um espaço on-line neutro e independente para os grupos tomarem decisões em conjunto.
+Ela fornece um espaço on-line neutro e independente para os grupos tomarem decisões em conjunto.
 
 3
 00:00:09,700 --> 00:00:12,000
@@ -12,15 +12,15 @@ Este é um grupo diversificado de pessoas ocupadas.
 
 4
 00:00:12,300 --> 00:00:17,670
-Eles não têm tempo para muitas reuniões e e-mail não funciona para debates complexos com muitas pessoas ao mesmo tempo.
+Elas não têm tempo para muitas reuniões e e-mail não funciona para debates complexos com muitas pessoas ao mesmo tempo.
 
 5
 00:00:17,670 --> 00:00:19,900
-Vamos ver como, em vez disso, eles usam Loomio.
+Vamos ver como, em vez disso, elas usam Loomio.
 
 6
 00:00:19,900 --> 00:00:24,600
-Qualquer um pode começar um debate sobre qualquer assunto,
+Qualquer pessoa pode começar um debate sobre qualquer assunto,
 é simples, claro e focado
 
 7
@@ -53,7 +53,7 @@ melhor compreendida e idéias começam a surgir.
 13
 00:00:48,440 --> 00:00:53,500
 Quando uma solução potencial vem à tona
-qualquer um pode começar uma proposta, que tem um prazo definido.
+qualquer pessoa pode começar uma proposta, que tem um prazo definido.
 
 14
 00:00:53,800 --> 00:00:56,500
@@ -62,7 +62,7 @@ A tomada de decisão acontece no lado direito.
 15
 00:00:56,500 --> 00:01:01,300
 Quando as pessoas manifestam as suas posições elas são
-solicitas a dar um resumo de uma frase que explica as suas decisões.
+solicitadas a fazer um resumo em uma frase que explica as suas decisões.
 
 16
 00:01:01,300 --> 00:01:06,400
@@ -84,7 +84,7 @@ e nível de engajamento, enquanto se mantêm no circuito.
 
 20
 00:01:18,000 --> 00:01:21,500
-Se você tem uma preocupação séria que você pode usar a opção da bandeira vermelha.
+Se você tem uma preocupação séria, você pode usar a opção da bandeira vermelha.
 
 21
 00:01:21,500 --> 00:01:25,700
