@@ -12,7 +12,12 @@ Loomio::Application.routes.draw do
     end
   end
 
+  get "/explore", to: 'explore#index', as: :explore
+  get "/explore/search", to: "explore#search", as: :search_explore
+  get "/explore/category/:id", to: "explore#category", as: :category_explore
+
   get "/groups", to: 'public_groups#index', as: :public_groups
+
   get "/new_group", to: 'groups#new'
 
   resource :search, only: :show
@@ -132,7 +137,7 @@ Loomio::Application.routes.draw do
     put    ':id(/:slug)', action: 'update'
     delete ':id(/:slug)', action: 'destroy'
 
-    post ':id/preview_version/(:version_id)', action: '#preview_version', as: 'preview_version_discussion'
+    post ':id/preview_version/(:version_id)', action: 'preview_version', as: 'preview_version_discussion'
     post 'update_version/:version_id',        action: 'update_version',   as: 'update_version_discussion'
   end
 
@@ -201,6 +206,7 @@ Loomio::Application.routes.draw do
     get :services
     get :terms_of_service
     get :third_parties
+    get :try_it
     get :wallets
     get :browser_not_supported
   end
@@ -217,7 +223,7 @@ Loomio::Application.routes.draw do
   match '/detect_video_locale' => 'detect_locale#video', as: :detect_video_locale
 
   resources :contact_messages, only: [:new, :create]
-  match 'contact', to: 'contact_messages#new'
+  match 'contact(/:destination)', to: 'contact_messages#new'
 
   #redirect from wall to new group signup
   namespace :group_requests do

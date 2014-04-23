@@ -108,6 +108,7 @@ a:hover { text-decoration: none; }
       margin: 10px 0 10px 10px;
     }
   }
+
   &.navbar-default .navbar-nav > li > a.btn:hover {
     text-decoration: none;
     color: white;
@@ -566,6 +567,40 @@ a:hover { text-decoration: none; }
   background-color: $purple;
   &:hover { background-color: darken($purple, 6%); }
   i { font-size: 1.6em; }
+}
+
+.media {
+  background-color: $ash;
+  .content {
+    @include screen-size(medium-up) {
+      width: 100%;
+      padding-bottom: 0;
+    }
+    @include screen(medium-only) {
+      width: 930px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  ul {
+    margin-top: 10px;
+    list-style: none;
+  }
+  li {
+    margin-bottom: 40px;
+    @include screen-size(medium-up) {
+      display: inline-block;
+      margin-right: 24px;
+    }
+    @include screen(medium-only) {
+      margin-right: 40px;
+    }
+    img {
+      @include screen-size(medium-up) {
+        width: 82%;
+      }
+    }
+  }
 }
 
 .footer {

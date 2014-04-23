@@ -1,6 +1,8 @@
 @import "settings";
 @import "bootstrap/mixins";
 @import "mixins";
+@import "marketing/color";
+@import "marketing/buttons";
 
 
 // CSS reset - does this exist elsewhere?
@@ -70,11 +72,6 @@ li.selector-item a.selector-link:hover {
   text-decoration: none;
 }
 
-.alert {
-  margin: 0px 0 0px -10px;
-  width: 890px;
-}
-
 // color coded urgency labels
 .color-urgent { background-color: #CA3232; }
 .color-warning { background-color: #F89406; }
@@ -120,6 +117,7 @@ a.btn-icon:hover { color: $dark-grey; }
 .pages.services,
 .pages.terms_of_service,
 .pages.third_parties,
+.pages.try_it,
 .pages.purpose,
 .pages.how_it_works,
 .pages.about_us,
@@ -337,6 +335,91 @@ a.btn-icon:hover { color: $dark-grey; }
     }
   }
 }
+$package-color: #51BD9E;
+.pages.services{
+  body, h1, h2, h3, h4, h5, p, div {
+    font-family: 'OpenSans', sans-serif;
+    font-weight: 400;
+    color: #444;
+    font-size: 18px;
+  }
+  p { text-align: justify; }
+  .inner-container{
+    padding: 60px 120px;
+  }
+  h1 {font-size:42px;}
+  .subtitle {
+    font-size: 28px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    line-height: 1.4em;
+    color: #888;
+  }
+  .description { margin-bottom: 30px; }
+  .package-titlearea {
+    background-color: $package-color;
+    padding: 30px;
+    p, h2, div { color: white; }
+    p {
+      margin-bottom: 0;
+      margin-top: 10px;
+      font-weight: 400;
+    }
+    h2 {
+      font-size: 26px;
+      font-weight: 600;
+    }
+  }
+  .package-content {
+    background-color: #E8E8E8;
+    padding: 30px;
+    margin-bottom: 40px;
+    h3 {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    li {
+      line-height: 2;
+      font-size: 0.9em;
+      font-style: italic;
+      font-weight: 400;
+    }
+  }
+  .package-btn:hover {
+    background-color: #209977;
+  }
+  .package-btn {
+    margin-top: 30px;
+    background-color: $package-color;
+    line-height: 1.4em;
+    padding: 0;
+    div { color: white; }
+    a {
+      display: block;
+      padding: 20px;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+    border-radius: 4px;
+  }
+  .package-btn-main {
+    font-weight: 700;
+    font-size: 22px;
+    padding: 6px;
+    text-align: center;
+  }
+  .package-btn-sub {
+    text-align: center;
+  }
+  a.package-link {
+    display: block;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+}
 
 .sessions.new section { margin-top: 0; }
 
@@ -395,7 +478,10 @@ body.pages.privacy, body.pages.third_parties {
 body.pages.privacy .container h3.subheader { margin-bottom: 24px; }
 
 .invitations.show, .registrations.create {
-  .alert { margin: 10px 0; }
+  .alert{
+    margin: 0px 0 0px -10px;
+    width: 890px;
+  }
   .terms-of-service-text {
     font-size: 1em;
     margin: 0 0 8px 2px;
@@ -413,6 +499,10 @@ body.pages.privacy .container h3.subheader { margin-bottom: 24px; }
     margin: 1em auto 0;
     width: 394px;
     text-align: center;
+  }
+  .alert{
+    margin: 0px 0 0px -10px;
+    width: 890px;
   }
   .container{
 
@@ -726,6 +816,7 @@ body.pages.wallets {
     vertical-align: top;
     display: inline-block;
     width: 45%;
+    margin-bottom: 40px;
 
     &.bitcoin img { margin: 2px 0 3px; }
 
@@ -739,6 +830,50 @@ body.pages.wallets {
         .title { font-weight: bold; }
         .address { font-style: italic; }
       }
+    }
+  }
+}
+
+body.pages.try_it {
+
+  h1, p, .button-text { font-family: 'Open Sans'; }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #797979;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 17px;
+    font-weight: 300;
+    color: $charcoal;
+  }
+
+  section { margin-top: 0; }
+
+  .fa, .join-loomio-community-icon {
+    display: block;
+    float: left;
+  }
+
+  .button-text {
+    margin: 5px 0 0 50px;
+    color: #fff;
+  }
+
+  .btn-try-it {
+    font-size: 22px;
+    font-weight: 300;
+    text-align: left;
+    padding: 30px;
+    margin: 24px 0 4px;
+    width: 420px;
+
+    .fa-try-it {
+      color: white;
+      font-size: 30px;
     }
   }
 }
