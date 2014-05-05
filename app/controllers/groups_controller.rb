@@ -16,8 +16,10 @@ class GroupsController < GroupBaseController
   #for new subgroup form
   def add_subgroup
     parent = Group.published.find(params[:id])
-    @subgroup = Group.new(:parent => parent, privacy: parent.privacy)
-    @subgroup.members_invitable_by = parent.members_invitable_by
+    @subgroup = Group.new(parent: parent,
+                          is_visible_to_public: parent.is_visible_to_public,
+                          discussion_privacy_options: parent.discussion_privacy_options)
+    @subgroup.members_can_add_members = parent.members_can_add_members
   end
 
   def create
@@ -29,7 +31,7 @@ class GroupsController < GroupBaseController
       @group.add_admin! current_user
       flash[:success] = t("success.group_created")
       redirect_to @group
-    elsif @group.is_a_subgroup?
+    elsif @group.is_subgroup?
         @subgroup = @group
         render 'groups/add_subgroup'
     else
@@ -45,7 +47,7 @@ class GroupsController < GroupBaseController
 
   def update
     if @group.update_attributes(permitted_params.group)
-      if @group.is_hidden?
+      if @group.private_discussions_only?
         @group.discussions.update_all(private: true)
       end
       Measurement.increment('groups.update.success')
@@ -119,14 +121,14 @@ class GroupsController < GroupBaseController
 
     def ensure_group_is_setup
       if user_signed_in? && @group.admins.include?(current_user)
-        unless @group.is_setup? || @group.is_a_subgroup?
+        unless @group.is_setup? || @group.is_subgroup?
           redirect_to setup_group_path(@group)
         end
       end
     end
 
     def assign_meta_data
-      if @group.privacy_public?
+      if @group.is_visible_to_public?
         @meta_title = @group.name
         @meta_description = @group.description
       end

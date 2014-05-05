@@ -17,7 +17,7 @@
       - if discussion.group.present? and discussion.group.beta_feature_enabled?('discussion_iframe') and can?(:update, discussion.group)
         =f.input :iframe_src
 
-      - if discussion.group.present? and discussion.group.is_hidden?
+      - if discussion.group.present? and discussion.group.is_hidden_from_public?
         .hidden-group-discussion-privacy
           %h3.header= t :'simple_form.labels.group.privacy'
           %i.fa.fa-lock

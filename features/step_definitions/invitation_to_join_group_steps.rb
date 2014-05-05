@@ -119,28 +119,28 @@ end
 
 Given /^I am a member of a group invitable by members$/ do
   @group = FactoryGirl.create :group
-  @group.members_invitable_by = :members
+  @group.members_can_add_members = true
   @group.save!
   @group.add_member! @user
 end
 
 Given /^the group is invitable by admins$/ do
-  @group.members_invitable_by = 'admins'
+  @group.members_can_add_members = false
   @group.save!
 end
 
 Given /^I am a member of a subgroup invitable by members$/ do
-  @subgroup = FactoryGirl.create :group, parent: @group, members_invitable_by: "members"
+  @subgroup = FactoryGirl.create :group, parent: @group, members_can_add_members: true
   @subgroup.add_member!(@user)
 end
 
 Given /^I am a member of a subgroup invitable by admins$/ do
-  @subgroup = FactoryGirl.create :group, parent: @group, members_invitable_by: "admins"
+  @subgroup = FactoryGirl.create :group, parent: @group, members_can_add_members: false
   @subgroup.add_member!(@user)
 end
 
 Given /^I am an admin of a subgroup invitable by admins$/ do
-  @subgroup = FactoryGirl.create :group, parent: @group, members_invitable_by: "admins"
+  @subgroup = FactoryGirl.create :group, parent: @group, members_can_add_members: false
   @subgroup.add_admin!(@user)
 end
 

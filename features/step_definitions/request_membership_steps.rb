@@ -90,7 +90,7 @@ Then(/^I should be returned to the group page$/) do
 end
 
 Given(/^membership requests can only be managed by group admins for the group$/) do
-  @group.members_invitable_by = 'admins'
+  @group.members_can_add_members = false
   @group.save
 end
 

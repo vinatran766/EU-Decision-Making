@@ -61,10 +61,10 @@ class User < ActiveRecord::Base
            :through => :memberships,
            conditions: { archived_at: nil }
 
-  has_many :public_groups,
+  has_many :visible_to_public_groups,
            :through => :memberships,
            :source => :group,
-           :conditions => { :privacy => 'public' }
+           :conditions => { is_visible_to_public: true }
 
   has_many :discussions,
            :through => :groups

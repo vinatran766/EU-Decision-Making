@@ -62,10 +62,6 @@ Then(/^I should see a page telling me the payment failed$/) do
   page.should have_content("something went wrong")
 end
 
-When(/^view screenshot$/) do
-  view_screenshot
-end
-
 When(/^I try to pay an invalid custom amount$/) do
   fill_in "subscription_form_custom_amount", with: "$3"
   click_on "Pay now with Paypal"
