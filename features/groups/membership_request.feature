@@ -1,9 +1,7 @@
-Feature: Individual requests group membership
+Feature: Group membership
   As a signed in OR signed out individual
   So that I can participate in discussions I'm interested in
   I want to be able to join groups
-
-## Request Membership
 
   Scenario: Vistor requests membership to public group
     Given I am a visitor
@@ -13,23 +11,32 @@ Feature: Individual requests group membership
     And I fill in and submit the Request membership form
     Then I should see a flash message confirming my membership request
 
+  Scenario: User joins open group
+    Given I am logged in
+    And a visible join instanty group exists
+    When I visit the group page
+    And I click "Join group"
+    Then I should be a member of the group
+
+  Scenario: User requests membership to approval required group
+    Given I am logged in
+    And an approval required group exists
+    When I visit the group page
+    And I click "Ask to join group"
+    And I fill in and submit the Request membership form (introduction only)
+    Then I should see a flash message confirming my membership request
+
+  Scenario: User cannot join invitation only group
+    Given I am logged in
+    And a visible but invitation only group exists
+    When I visit the group page
+    Then I should see that membership is by invitation only
+
   Scenario: Visitor cannot request membership to a group using email of existing member
     Given I am a visitor
     When I visit the request membership page for a group
     And I fill in and submit the Request membership form using email of existing member
     Then I should see a field error telling me I am already a member of the group
-
-  Scenario: Vistor cannot request membership to hidden group
-    Given I am a visitor
-    And a hidden group exists
-    When I visit the request membership page for the group
-    Then I should be asked to log in
-
-  Scenario: Visitor cannot request membership to a subgroup
-    Given I am a visitor
-    And a public sub-group exists
-    When I visit the request membership page for the sub-group
-    Then I should be asked to log in
 
   Scenario: Visitor with pending membership request cannot submit new request
     Given I am a visitor
@@ -38,40 +45,13 @@ Feature: Individual requests group membership
     And I fill in and submit the Request membership form
     Then I should see a field error telling me I have already requested membership
 
+
   Scenario: Visitor requests membership, is ignored, then requests again
     Given I am a visitor
     And I have requested membership as a visitor and been ignored
     When I visit the group page
     And I click "Ask to join group"
     And I fill in and submit the Request membership form
-    Then I should see a flash message confirming my membership request
-
-  Scenario: User requests membership to public group
-    Given I am logged in
-    And an open group exists
-    When I visit the group page
-    And I click "Ask to join group"
-    And I fill in and submit the Request membership form (introduction only)
-    Then I should see a flash message confirming my membership request
-
-  Scenario: User cannot request membership to hidden group
-    Given I am logged in
-    And a hidden group exists
-    When I visit the request membership page for the group
-    Then I should be redirected to the dashboard
-
-  Scenario: User cannot request membership to a sub-group viewable by parent
-    Given I am logged in
-    And a sub-group viewable by parent-group members exists
-    When I visit the request membership page for the sub-group
-    Then I should be redirected to the dashboard
-
-  Scenario: User can request membership to a sub-group if they are not member of parent
-    Given I am logged in
-    And a public sub-group exists
-    When I visit the sub-group page
-    And I click "Ask to join group"
-    And I fill in and submit the Request membership form (introduction only)
     Then I should see a flash message confirming my membership request
 
   Scenario: User with pending membership request cannot submit new request
@@ -95,20 +75,6 @@ Feature: Individual requests group membership
     And I have requested membership and been ignored
     When I visit the group page
     And I click "Ask to join group"
-    And I fill in and submit the Request membership form (introduction only)
-    Then I should see a flash message confirming my membership request
-
-  Scenario: Parent group member requests membership to a public sub-group
-    Given I am logged in
-    And I am a member of a parent-group that has a public sub-group
-    When I visit the request membership page for the sub-group
-    And I fill in and submit the Request membership form (introduction only)
-    Then I should see a flash message confirming my membership request
-
-  Scenario: Parent group member requests membership to a sub-group viewable by parent
-    Given I am logged in
-    And I am a member of a parent-group that has a sub-group viewable by parent-group members
-    When I visit the request membership page for the sub-group
     And I fill in and submit the Request membership form (introduction only)
     Then I should see a flash message confirming my membership request
 

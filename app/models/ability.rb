@@ -86,16 +86,9 @@ class Ability
       not user_to_deactivate.adminable_groups.any? { |g| g.admins.count == 1 }
     end
 
-    can :request_membership, Group do |group|
-      if group.is_archived?
-        false
-      elsif group.is_visible_to_public?
-        true
-      elsif group.is_visible_to_parent_members? and @member_group_ids.include?(group.parent_id)
-        true
-      else
-        false
-      end
+    can :create, MembershipRequest do |request|
+      group = request.group
+      can?(:show, group) and group.membership_granted_upon_approval?
     end
 
     can :cancel, MembershipRequest, requestor_id: user.id

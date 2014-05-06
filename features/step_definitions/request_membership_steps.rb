@@ -1,3 +1,19 @@
+Given(/^a visible join instanty group exists$/) do
+  @group = FactoryGirl.create(:group, is_visible_to_public: true, membership_granted_upon: 'request')
+end
+
+Given(/^an approval required group exists$/) do
+  @group = FactoryGirl.create(:group, is_visible_to_public: true, membership_granted_upon: 'approval')
+end
+
+Given(/^a visible but invitation only group exists$/) do
+  @group = FactoryGirl.create(:group, is_visible_to_public: true, membership_granted_upon: 'invitation')
+end
+
+Then(/^I should see that membership is by invitation only$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
 When(/^I fill in and submit the Request membership form$/) do
   fill_in 'membership_request_name', with: @visitor_name
   fill_in 'membership_request_email', with: @visitor_email

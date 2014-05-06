@@ -2,6 +2,24 @@ require 'spec_helper'
 
 describe Groups::MembershipRequestsController do
 
+  describe '#create' do
+    context "invalid membership request" do
+      it "renders new"
+    end
+
+    context "join membership_granted_upon: request group" do
+      it "creates granted membership_request and redirects to group"
+    end
+
+    context "join membership_granted_upon: approval group" do
+      it "creates membership_request and sets flash notice"
+    end
+
+    context "join membership_granted_upon: invitation group" do
+      it "redirects to dashboard with 'invitatoin only' message"
+    end
+  end
+
   describe '#cancel' do
     let(:requestor) { create(:user) }
     let(:group) { mock_model Group, full_name: "Isolde's Bane" }
@@ -26,6 +44,7 @@ describe Groups::MembershipRequestsController do
         flash[:success].should =~ /Membership request canceled/i
       end
     end
+
     context "a user doesn't have permission to cancel membership request" do
       before { membership_request.stub(:requestor_id).and_return(requestor.id+1) }
       it "doesn't destroy the membership request" do
