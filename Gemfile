@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
 ruby '2.0.0'
-gem 'rails', '~> 3.2.17'
-gem 'rake', '~> 10.2.1'
+gem 'rails', '~> 3.2.18'
+gem 'rake', '~> 10.3.1'
 gem 'haml-rails', '~> 0.4.0'
 gem 'devise', '~> 3.2.0'
 gem 'omniauth', '~> 1.2.1'
@@ -54,6 +54,7 @@ gem 'ruby-progressbar', '~> 1.4.1'
 gem 'bing_translator', '~> 4.2.0'
 gem 'librato-rails'
 gem 'browser'
+gem 'activerecord-postgres-hstore'
 
 # Gems used only for assets and not required
 # in production environments by default.

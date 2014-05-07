@@ -87,11 +87,11 @@ class Group < ActiveRecord::Base
   has_one :group_request
 
   has_many :memberships,
-    :dependent => :destroy,
-    :extend => GroupMemberships
+           dependent: :destroy,
+           extend: GroupMemberships
 
   has_many :membership_requests,
-    :dependent => :destroy
+           dependent: :destroy
 
   has_many :pending_membership_requests,
            class_name: 'MembershipRequest',
@@ -99,9 +99,9 @@ class Group < ActiveRecord::Base
            dependent: :destroy
 
   has_many :admin_memberships,
-    conditions: { admin: true },
-    class_name: 'Membership',
-    dependent: :destroy
+           conditions: { admin: true },
+           class_name: 'Membership',
+           dependent: :destroy
 
   has_many :members,
            through: :memberships,
@@ -120,9 +120,9 @@ class Group < ActiveRecord::Base
   has_many :discussions, dependent: :destroy
   has_many :motions, through: :discussions
 
-  belongs_to :parent, class_name: "Group"
+  belongs_to :parent, class_name: 'Group'
   belongs_to :category
-  has_many :subgroups, class_name: "Group", foreign_key: 'parent_id', conditions: { archived_at: nil }
+  has_many :subgroups, class_name: 'Group', foreign_key: 'parent_id', conditions: { archived_at: nil }
 
   has_one :subscription, dependent: :destroy
 
@@ -165,7 +165,7 @@ class Group < ActiveRecord::Base
   def archive!
     self.discussions.each(&:archive!)
     self.update_attribute(:archived_at, DateTime.now)
-    memberships.update_all(:archived_at => DateTime.now)
+    memberships.update_all(archived_at: DateTime.now)
     subgroups.each do |group|
       group.archive!
     end

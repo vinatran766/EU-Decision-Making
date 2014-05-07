@@ -87,7 +87,7 @@ class Ability
     end
 
     can :deactivate, User do |user_to_deactivate|
-      not user_to_deactivate.adminable_groups.any? { |g| g.admins.count == 1 }
+      not user_to_deactivate.adminable_groups.published.any? { |g| g.admins.count == 1 }
     end
 
     can :create, MembershipRequest do |request|
@@ -160,7 +160,19 @@ class Ability
     can [:close, :edit_close_date], Motion do |motion|
       motion.voting? && ((motion.author_id == user.id) || user_is_admin_of?(motion.discussion.group_id))
     end
-
+    
+    can [:show], Comment do |comment|
+      can?(:show, comment.discussion)      
+    end
+    
+    can [:show], Motion do |motion|
+      can?(:show, motion.discussion)      
+    end
+    
+    can [:show], Vote do |vote|
+      can?(:show, vote.motion)      
+    end
+    
     can [:destroy,
          :create_outcome,
          :update_outcome], Motion do |motion|
