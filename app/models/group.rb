@@ -209,6 +209,18 @@ class Group < ActiveRecord::Base
     end
   end
 
+  def membership_granted_upon_approval?
+    membership_granted_upon == 'approval'
+  end
+
+  def membership_granted_upon_request?
+    membership_granted_upon == 'request'
+  end
+
+  def membership_granted_upon_invitation?
+    membership_granted_upon == 'invitation'
+  end
+
   def is_parent?
     parent_id.blank?
   end
@@ -223,6 +235,14 @@ class Group < ActiveRecord::Base
 
   def membership(user)
     memberships.where("group_id = ? AND user_id = ?", id, user.id).first
+  end
+
+  def pending_membership_request_for(user)
+    if user.is_logged_in?
+      membership_requests.pending.where(requestor_id: user.id).first
+    else
+      false
+    end
   end
 
   def private_discussions_only?

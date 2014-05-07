@@ -59,14 +59,16 @@ module GroupsHelper
     end
   end
 
-  def request_membership_button(group)
-    if visitor?
-      request_membership_icon_button(group)
-    else
-      return if group.users_include?(current_user)
+  def join_group_button(group, args = {})
+    case group.membership_granted_upon
+    when 'request'
 
-      membership_request = group.membership_requests.pending.requested_by(current_user).first
-      if membership_request.present?
+      icon_button({href: join_group_path(group),
+                   method: :post,
+                   text: t(:join_group_btn)}.merge(args))
+    when 'approval'
+      if group.pending_membership_request_for(current_user_or_visitor)
+        membership_request = group.membership_requests.pending.where(requestor_id: current_user_or_visitor).first
         cancel_membership_request_button(membership_request)
       else
         request_membership_icon_button(group)
@@ -74,11 +76,6 @@ module GroupsHelper
     end
   end
 
-  def disabled_request_membership_button(group)
-    request_membership_icon_button(group, href: "#", class: "btn-info disabled tooltip-top",
-                                   id: 'request-membership-disabled',
-                                   title: "You must be a member of the parent group before you can join this subgroup.")
-  end
 
   def cancel_membership_request_button(membership_request)
     icon_button(href: cancel_membership_request_path(membership_request),
@@ -91,7 +88,7 @@ module GroupsHelper
   end
 
   def request_membership_icon_button(group, params={})
-    old_params = { href: group_ask_to_join_path(group),
+    old_params = { href: new_group_membership_request_path(group),
                    text: t(:ask_to_join_group),
                    icon: nil,
                    id: 'request-membership',

@@ -1,22 +1,21 @@
-Feature: Group membership
+Feature: Request Membership to Group
   As a signed in OR signed out individual
   So that I can participate in discussions I'm interested in
   I want to be able to join groups
 
-  Scenario: Vistor requests membership to public group
+  Scenario: User cannot join invitation only group
+    Given I am logged in
+    And a visible but invitation only group exists
+    When I visit the group page
+    Then I should see that membership is by invitation only
+
+  Scenario: Vistor requests membership to approval required group
     Given I am a visitor
-    And an open group exists
+    And an approval required group exists
     When I visit the group page
     And I click "Ask to join group"
     And I fill in and submit the Request membership form
     Then I should see a flash message confirming my membership request
-
-  Scenario: User joins open group
-    Given I am logged in
-    And a visible join instanty group exists
-    When I visit the group page
-    And I click "Join group"
-    Then I should be a member of the group
 
   Scenario: User requests membership to approval required group
     Given I am logged in
@@ -25,12 +24,6 @@ Feature: Group membership
     And I click "Ask to join group"
     And I fill in and submit the Request membership form (introduction only)
     Then I should see a flash message confirming my membership request
-
-  Scenario: User cannot join invitation only group
-    Given I am logged in
-    And a visible but invitation only group exists
-    When I visit the group page
-    Then I should see that membership is by invitation only
 
   Scenario: Visitor cannot request membership to a group using email of existing member
     Given I am a visitor
@@ -44,7 +37,6 @@ Feature: Group membership
     When I visit the request membership page for the group
     And I fill in and submit the Request membership form
     Then I should see a field error telling me I have already requested membership
-
 
   Scenario: Visitor requests membership, is ignored, then requests again
     Given I am a visitor

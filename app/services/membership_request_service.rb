@@ -9,13 +9,14 @@ class MembershipRequestService
     if requestor.ability.can?(:create, membership_request)
       membership_request.save!
       Events::MembershipRequested.publish!(membership_request)
+    else
+      false
     end
-    membership_request
   end
 
   private
 
   def requestor
-    membership_request.requestor
+    membership_request.requestor || LoggedOutUser.new
   end
 end

@@ -1,24 +1,22 @@
 class Groups::MembershipRequestsController < BaseController
   skip_before_filter :authenticate_user!, except: :cancel
-  before_filter :build_membership_request
+  before_filter :load_group, except: :cancel
+  before_filter :build_membership_request, except: [:cancel]
+  load_and_authorize_resource :membership_request, only: :cancel
 
   def new
     store_previous_location
   end
 
   def create
-    service = JoinGroupService.new(@membership_request)
-    service.perform!
-
-    if service.membership_granted?
-      flash[:notice] = "You have joined #{@group.name}"
-      redirect_to @group
-    elsif service.membership_pending?
+    if @membership_request.valid? and MembershipRequestService.new(@membership_request).perform!
       flash[:success] = t(:'success.membership_requested', which_group: @group.full_name)
       redirect_to after_request_membership_path
-    elsif service.membership_denied?
-      flash[:notice] = "This group is invitation only"
-      redirect_to @group
+    else
+      if @membership_request.errors[:requestor].present?
+        flash[:alert] = @membership_request.errors.values.first
+      end
+      render :new
     end
   end
 
@@ -30,10 +28,15 @@ class Groups::MembershipRequestsController < BaseController
 
   private
 
-  def build_membership_request
+  def load_group
     @group = GroupDecorator.new(Group.find_by_key!(params[:group_id]))
-    args = permitted_params.membership_request
-    args.merge!(group: @group, requestor: current_user)
+  end
+
+  def build_membership_request
+    args = {group: @group, requestor: current_user}
+    if params[:membership_request].present?
+      args.merge! permitted_params.membership_request
+    end
     @membership_request = MembershipRequest.new(args)
   end
 

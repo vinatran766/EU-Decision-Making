@@ -21,6 +21,10 @@ class LoggedOutUser
     nil
   end
 
+  def is_group_member?(group)
+    false
+  end
+
   def is_logged_in?
     false
   end
@@ -44,4 +48,17 @@ class LoggedOutUser
   def selected_locale
     nil
   end
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
+
+  def adminable_group_ids
+    []
+  end
+
+  def group_ids
+    []
+  end
+
 end

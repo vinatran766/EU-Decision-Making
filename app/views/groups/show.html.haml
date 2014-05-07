@@ -9,20 +9,13 @@
       = render 'invite_button', group: @group, discussion: @discussion
     = render 'options_dropdown', group: @group
 
-    - unless current_user_or_vistor.is_group_member? @group
-      - case @group.membership_granted_upon
-      - when "request"
-        = join_group_button(@group)
-      - when "approval"
-        = request_membership_button(@group)
-      - when "invitation"
-        = "Membership by invitation only"
+    - unless current_user_or_visitor.is_group_member? @group
+      = join_group_button(@group)
 
 .row.main-content
   =render 'discussions/discussion_list'
   %section.span3
     =render 'setup_next_steps' if show_next_steps?(@group)
-    / =render 'subscription_prompt' if show_subscription_prompt?(@group)
     =render 'groups/description', group: @group
     =render 'subgroups', subgroups: @subgroups, group: @group if display_subgroups_block?(@group)
     - if @closed_motions.any?

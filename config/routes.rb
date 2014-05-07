@@ -40,7 +40,10 @@ Loomio::Application.routes.draw do
   resources :invitations, only: [:show, :create, :destroy]
 
   resources :groups, path: 'g', only: [:new, :create, :edit, :update] do
+    post :join, on: :member
+
     scope module: :groups do
+
       resources :memberships, only: [:index, :destroy, :new, :create] do
         member do
          post :make_admin
@@ -55,6 +58,7 @@ Loomio::Application.routes.draw do
           get :payment_failed
         end
       end
+
       scope controller: 'group_setup' do
         member do
           get :setup
@@ -62,8 +66,7 @@ Loomio::Application.routes.draw do
         end
       end
 
-      get :ask_to_join, controller: 'membership_requests', action: :new
-      resources :membership_requests, only: [:create]
+      resources :membership_requests, only: [:create, :new]
       get :membership_requests,  to: 'manage_membership_requests#index', as: 'membership_requests'
     end
 

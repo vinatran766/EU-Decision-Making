@@ -22,6 +22,11 @@ class GroupsController < GroupBaseController
     @subgroup.members_can_add_members = parent.members_can_add_members
   end
 
+  def join
+    MembershipService.join_group(group: @group, user: current_user)
+    redirect_to @group, notice: t(:you_have_joined_group, group_name: @group.name)
+  end
+
   def create
     @group = Group.new(permitted_params.group)
     authorize!(:create, @group)

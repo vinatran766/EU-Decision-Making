@@ -79,6 +79,7 @@ Given(/^I am invited at "(.*?)" to join a group$/) do |arg1|
 end
 
 Then(/^I should be a member of the group$/) do
+  view_screenshot
   @group.members.should include @user
 end
 

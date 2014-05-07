@@ -67,6 +67,10 @@ class Ability
       end
     end
 
+    can :join, Group do |group|
+      can?(:show, group) and group.membership_granted_upon_request?
+    end
+
     can [:make_admin], Membership do |membership|
       @admin_group_ids.include?(membership.group_id)
     end
