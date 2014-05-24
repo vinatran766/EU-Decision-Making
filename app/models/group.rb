@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
   attr_accessible :name, :members_can_add_members, :parent, :parent_id, :description, :max_size,
                   :cannot_contribute, :full_name, :payment_plan, :parent_members_can_see_discussions,
                   :category_id, :max_size, :is_visible_to_parent_members, :is_visible_to_public, :discussion_privacy_options,
-                  :visible_to
+                  :visible_to, :theme_id, :subdomain
   acts_as_tree
 
   PAYMENT_PLANS = ['pwyc', 'subscription', 'manual_subscription', 'undetermined']
@@ -23,6 +23,11 @@ class Group < ActiveRecord::Base
   validates_inclusion_of :membership_granted_upon, in: MEMBERSHIP_GRANTED_UPON_OPTIONS
   validates :description, :length => { :maximum => 250 }
   validates :name, :length => { :maximum => 250 }
+  validates_inclusion_of :privacy, in: PRIVACY_CATEGORIES
+  validates_inclusion_of :members_invitable_by, in: INVITER_CATEGORIES
+  validates :description, length: { maximum: 250 }
+  validates :name, length: { maximum: 250 }
+
   validate :limit_inheritance
   validate :validate_parent_members_can_see_discussions
   validate :validate_is_visible_to_parent_members
@@ -40,7 +45,7 @@ class Group < ActiveRecord::Base
   scope :archived, lambda { where('archived_at IS NOT NULL') }
   scope :published, lambda { where(archived_at: nil) }
 
-  scope :parents_only, where(:parent_id => nil)
+  scope :parents_only, where(parent_id: nil)
 
   scope :sort_by_popularity, order('memberships_count DESC')
 
@@ -122,6 +127,8 @@ class Group < ActiveRecord::Base
 
   belongs_to :parent, class_name: 'Group'
   belongs_to :category
+  belongs_to :theme
+
   has_many :subgroups, class_name: 'Group', foreign_key: 'parent_id', conditions: { archived_at: nil }
 
   has_one :subscription, dependent: :destroy
@@ -296,7 +303,7 @@ class Group < ActiveRecord::Base
   def invitations_remaining
     max_size - memberships_count - pending_invitations.count
   end
-
+  
   def has_member_with_email?(email)
     members.where(email: email).any?
   end
@@ -342,6 +349,30 @@ class Group < ActiveRecord::Base
   def is_paying?
     (payment_plan == 'manual_subscription') ||
     (subscription.present? && subscription.amount > 0)
+  end
+
+  def has_subdomain?
+    if is_sub_group?
+      parent.has_subdomain?
+    else
+      subdomain.present?
+    end
+  end
+
+  def subdomain
+    if is_sub_group?
+      parent.subdomain
+    else
+      super
+    end
+  end
+
+  def theme
+    if is_sub_group?
+      parent.theme
+    else
+      super
+    end
   end
 
   private

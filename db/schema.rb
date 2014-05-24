@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140406041115) do
+ActiveRecord::Schema.define(:version => 20140520021918) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -351,6 +351,8 @@ ActiveRecord::Schema.define(:version => 20140406041115) do
     t.string   "discussion_privacy_options",                                     :null => false
     t.boolean  "members_can_add_members",            :default => false,          :null => false
     t.string   "membership_granted_upon",                                        :null => false
+    t.string   "subdomain"
+    t.integer  "theme_id"
   end
 
   add_index "groups", ["archived_at", "id"], :name => "index_groups_on_archived_at_and_id"
@@ -495,6 +497,22 @@ ActiveRecord::Schema.define(:version => 20140406041115) do
   end
 
   add_index "subscriptions", ["group_id"], :name => "index_subscriptions_on_group_id"
+
+  create_table "themes", :force => true do |t|
+    t.text     "style"
+    t.string   "name"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "pages_logo_file_name"
+    t.string   "pages_logo_content_type"
+    t.integer  "pages_logo_file_size"
+    t.datetime "pages_logo_updated_at"
+    t.string   "app_logo_file_name"
+    t.string   "app_logo_content_type"
+    t.integer  "app_logo_file_size"
+    t.datetime "app_logo_updated_at"
+    t.text     "javascript"
+  end
 
   create_table "translations", :force => true do |t|
     t.integer  "translatable_id"
