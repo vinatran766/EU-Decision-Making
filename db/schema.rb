@@ -346,13 +346,13 @@ ActiveRecord::Schema.define(:version => 20140520021918) do
     t.boolean  "can_start_group",                    :default => true
     t.integer  "category_id"
     t.text     "enabled_beta_features"
+    t.string   "subdomain"
+    t.integer  "theme_id"
     t.boolean  "is_visible_to_public",               :default => false,          :null => false
     t.boolean  "is_visible_to_parent_members",       :default => false,          :null => false
     t.string   "discussion_privacy_options",                                     :null => false
     t.boolean  "members_can_add_members",            :default => false,          :null => false
     t.string   "membership_granted_upon",                                        :null => false
-    t.string   "subdomain"
-    t.integer  "theme_id"
   end
 
   add_index "groups", ["archived_at", "id"], :name => "index_groups_on_archived_at_and_id"

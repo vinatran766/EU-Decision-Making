@@ -21,10 +21,6 @@ class Group < ActiveRecord::Base
   validates_inclusion_of :payment_plan, in: PAYMENT_PLANS
   validates_inclusion_of :discussion_privacy_options, in: DISCUSSION_PRIVACY_OPTIONS
   validates_inclusion_of :membership_granted_upon, in: MEMBERSHIP_GRANTED_UPON_OPTIONS
-  validates :description, :length => { :maximum => 250 }
-  validates :name, :length => { :maximum => 250 }
-  validates_inclusion_of :privacy, in: PRIVACY_CATEGORIES
-  validates_inclusion_of :members_invitable_by, in: INVITER_CATEGORIES
   validates :description, length: { maximum: 250 }
   validates :name, length: { maximum: 250 }
 
@@ -352,7 +348,7 @@ class Group < ActiveRecord::Base
   end
 
   def has_subdomain?
-    if is_sub_group?
+    if is_subgroup?
       parent.has_subdomain?
     else
       subdomain.present?
@@ -360,7 +356,7 @@ class Group < ActiveRecord::Base
   end
 
   def subdomain
-    if is_sub_group?
+    if is_subgroup?
       parent.subdomain
     else
       super
@@ -368,7 +364,7 @@ class Group < ActiveRecord::Base
   end
 
   def theme
-    if is_sub_group?
+    if is_subgroup?
       parent.theme
     else
       super

@@ -17,6 +17,122 @@ describe "User abilities" do
                                                                                  group: group,
                                                                                  inviter: other_user) }
   it { should     be_able_to(:create, group) }
+  
+  context "in relation to a group" do
+    describe "is_visible_to_public?" do
+      context "true" do
+        before { group.update_attribute(:is_visible_to_public, true) }
+
+        describe "non member" do
+          it {should be_able_to(:show, group)}
+        end
+
+        describe "member" do
+          before { group.add_member!(user) }
+
+          it {should be_able_to(:show, group)}
+        end
+      end
+
+      context "false" do
+        before { group.update_attribute(:is_visible_to_public, false) }
+
+        describe "non member" do
+          it {should_not be_able_to(:show, group)}
+        end
+
+        describe "member" do
+          before { group.add_member!(user) }
+          it {should be_able_to(:show, group)}
+        end
+      end
+    end
+
+    describe "is_visible_to_parent_members?" do
+      let(:parent_group) { create(:group) }
+
+      before do
+        group.update_attribute(:is_visible_to_public, false)
+        group.parent = parent_group
+        group.save
+      end
+
+      context "true" do
+        before { group.update_attribute(:is_visible_to_parent_members, true) }
+
+        describe "non member" do
+          it { should_not be_able_to(:show, group) }
+        end
+
+        describe "member of parent only" do
+          before { parent_group.add_member!(user) }
+          it {should be_able_to(:show, group)}
+        end
+
+        describe "member of subgroup only" do
+          before { group.add_member!(user) }
+          it {should be_able_to(:show, group)}
+        end
+      end
+
+      context "false" do
+        before { group.update_attribute(:is_visible_to_parent_members, false) }
+
+        describe "non member" do
+          it { should_not be_able_to(:show, group) }
+        end
+
+        describe "member of parent only" do
+          before { parent_group.add_member!(user) }
+          it {should_not be_able_to(:show, group)}
+        end
+
+        describe "member of subgroup only" do
+          before { group.add_member!(user) }
+          it {should be_able_to(:show, group)}
+        end
+      end
+    end
+
+    describe "members_can_add_members?" do
+
+      context "true" do
+        before { group.update_attribute(:members_can_add_members, true) }
+
+        describe "non member of group" do
+          it {should_not be_able_to(:add_members, group)}
+        end
+
+        describe "member of group" do
+          before { group.add_member!(user) }
+          it {should be_able_to(:add_members, group)}
+        end
+
+        describe "admin of group" do
+          before { group.add_admin!(user) }
+          it {should be_able_to(:add_members, group)}
+        end
+      end
+
+      context "false" do
+        before { group.update_attribute(:members_can_add_members, false) }
+
+        describe "non member of group" do
+          it {should_not be_able_to(:add_members, group)}
+        end
+
+        describe "member of group" do
+          before { group.add_member!(user) }
+          it {should_not be_able_to(:add_members, group)}
+        end
+
+        describe "admin of group" do
+          before { group.add_admin!(user) }
+          it {should be_able_to(:add_members, group)}
+        end
+      end
+    end
+  end
 
   context "member of a group" do
     let(:group) { create(:group) }
@@ -116,38 +232,6 @@ describe "User abilities" do
       it { should_not be_able_to(:ignore, membership_request) }
       it { should_not be_able_to(:destroy, @other_membership) }
     end
-
-    context "viewing a subgroup they do not belong to" do
-      let(:subgroup) { create(:group, parent: group) }
-
-      context "visible subgroup, visible parent" do
-        before do
-          group.update_attributes(is_visible_to_public: true)
-          subgroup.update_attributes(is_visible_to_public: true)
-        end
-        it { should     be_able_to(:show, subgroup) }
-        it { should     be_able_to(:request_membership, subgroup) }
-      end
-
-      context "hidden subgroup, visible parent" do
-        before do
-          group.update_attributes(is_visible_to_public: true)
-          subgroup.update_attributes(is_visible_to_public: false)
-        end
-
-        it { should_not be_able_to(:show, subgroup) }
-        it { should_not be_able_to(:request_membership, subgroup) }
-      end
-
-      context "subgroup viewable by parent members" do
-        before do
-          group.update_attributes(is_visible_to_public: false)
-          subgroup.update_attributes(is_visible_to_parent_members: true)
-        end
-        it { should     be_able_to(:show, subgroup) }
-        it { should     be_able_to(:request_membership, subgroup) }
-      end
-    end
   end
 
   context "admin of a group" do
@@ -231,7 +315,6 @@ describe "User abilities" do
       let(:other_membership_request) { create(:membership_request, group: group, requestor: other_user) }
 
       it { should_not be_able_to(:show, group) }
-      it { should_not be_able_to(:request_membership, group) }
       it { should_not be_able_to(:update, group) }
       it { should_not be_able_to(:email_members, group) }
       it { should_not be_able_to(:add_subgroup, group) }
@@ -274,7 +357,6 @@ describe "User abilities" do
       let(:other_membership_request) { create(:membership_request, group: group, requestor: other_user) }
 
       it { should     be_able_to(:show, group) }
-      it { should     be_able_to(:request_membership, group) }
       it { should_not be_able_to(:view_payment_details, group) }
       it { should_not be_able_to(:choose_subscription_plan, group) }
       it { should_not be_able_to(:update, group) }
