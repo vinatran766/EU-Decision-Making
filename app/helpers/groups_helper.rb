@@ -62,7 +62,6 @@ module GroupsHelper
   def join_group_button(group, args = {})
     case group.membership_granted_upon
     when 'request'
-
       icon_button({href: join_group_path(group),
                    method: :post,
                    text: t(:join_group_btn)}.merge(args))
