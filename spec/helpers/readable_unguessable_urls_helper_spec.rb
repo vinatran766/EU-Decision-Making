@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-ActionMailer::Base.default_url_options = { host: 'www.emailexample.com' }
+ActionMailer::Base.default_url_options = { host: 'localhost', port: 3000 }
 
 describe ReadableUnguessableUrlsHelper do
   let(:request) { double(:request, subdomain: nil, port: 80, ssl?: false, host: 'www.example.com') }
@@ -18,7 +18,7 @@ describe ReadableUnguessableUrlsHelper do
 
       context "used within an email" do
         before { helper.stub(:request).and_return(nil) }
-        it{ should == "http://www.emailexample.com/g/key/name" }
+        it{ should == "http://localhost:3000/g/key/name" }
       end
 
       context "used on default subdomain" do
@@ -37,7 +37,7 @@ describe ReadableUnguessableUrlsHelper do
 
       context "used within an email" do
         before { helper.stub(:request).and_return(nil) }
-        it{ should == "http://custom.emailexample.com" }
+        it{ should == "http://custom.localhost:3000" }
       end
 
       context "used on default subdomain" do
@@ -57,7 +57,7 @@ describe ReadableUnguessableUrlsHelper do
 
       context "used within an email" do
         before { helper.stub(:request).and_return(nil) }
-        it{ should == "http://parent_subdomain.emailexample.com/g/key/parent-subgroup" }
+        it{ should == "http://parent_subdomain.localhost:3000/g/key/parent-subgroup" }
       end
 
       context "used on default subdomain" do
@@ -76,6 +76,10 @@ describe ReadableUnguessableUrlsHelper do
   describe "group_path" do
     before do
       ENV['DEFAULT_SUBDOMAIN'] = 'www'
+    end
+
+    after do
+      ENV.delete('DEFAULT_SUBDOMAIN')
     end
 
     subject { helper.group_path(group) }

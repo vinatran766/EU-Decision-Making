@@ -27,22 +27,20 @@ Then(/^I should see that someone closed the motion$/) do
 end
 
 Given(/^a visitor has requested membership to the group$/) do
-  visit group_path @group
-  click_on :'request-membership'
-  fill_in 'membership_request_name', with: @user.name
-  fill_in 'membership_request_email', with: @user.email
-  fill_in 'membership_request_introduction', with: 'Hi there'
-  click_on 'Ask to join group'
+  params = { name: "Richie", email: "rich@loomio.org", group: @group }
+  @membership_request = MembershipRequest.new(params)
+  MembershipRequestService.new(@membership_request).perform!
 end
 
 Then(/^I should see that the visitor requested access to the group$/) do
+  view_screenshot
   find("#notifications-container").should have_content(@membership_request.name + " " + I18n.t('notifications.membership_requested'))
 end
 
 Given(/^a user has requested membership to the group$/) do
   @requestor = FactoryGirl.create :user
   @membership_request = MembershipRequest.new(group: @group, requestor: @requestor)
-  MembershipRequestService.new(@membership_request).perform!
+  MembershipRequestService.new(membership_request).perform!
 end
 
 Then(/^I should see that the user requested access to the group$/) do
