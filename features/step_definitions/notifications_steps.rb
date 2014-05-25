@@ -39,7 +39,7 @@ end
 Given(/^a user has requested membership to the group$/) do
   @requestor = FactoryGirl.create :user
   @membership_request = MembershipRequest.new(group: @group, requestor: @requestor)
-  MembershipRequestService.new(membership_request).perform!
+  MembershipRequestService.new(@membership_request).perform!
 end
 
 Then(/^I should see that the user requested access to the group$/) do
