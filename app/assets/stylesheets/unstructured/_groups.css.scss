@@ -189,7 +189,6 @@ body.group_setup.setup, body.groups.new, body.groups.edit, body.groups.add_subgr
       line-height: 32px;
       margin-bottom: .6em;
     }
-    input[type="submit"] { margin-top: .4em; }
     label { font-size: 18px; }
     textarea {
       @include placeholder { font-style: italic; }

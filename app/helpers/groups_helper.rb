@@ -3,27 +3,33 @@ module GroupsHelper
     options = []
 
     unless group.is_subgroup_of_hidden_parent?
-      options << ['Anyone can see the group (it’s name and who’s in it)', 'public']
+      options << [t(:'group_form.visible_to.public'), 'public']
     end
 
     if group.is_subgroup?
-      options << ["Anyone in #{group.parent_name} can see the group", "parent_members"]
+      options << [t(:'group_form.visible_to.parent_members', parent_group_name: group.parent.name ),
+                  "parent_members"]
     end
 
-    options << ["Only members can see the group", "members"]
+    options << [t(:'group_form.visible_to.members'), "members"]
 
     options
   end
 
   def group_joining_options(group)
     if group.is_subgroup_of_hidden_parent?
-      [["Anyone in #{group.parent_name} can join", 'request'],
-       ["Anyone in #{group.parent_name} can request to join", 'approval'],
-       ["Invitation only", 'invitation']]
+      [[t(:'group_form.membership_granted_upon.hidden_parent.request',
+          parent_group_name: group.parent.name),
+        'request'],
+       [t(:'group_form.membership_granted_upon.hidden_parent.approval',
+          parent_group_name: group.parent.name),
+        'approval'],
+       [t(:'group_form.membership_granted_upon.invitation'),
+        'invitation']]
     else
-      [['Anyone can join', 'request'],
-       ['Anyone can request to join', 'approval'],
-       ['Invitation only', 'invitation']]
+      [[t(:'group_form.membership_granted_upon.request'), 'request'],
+       [t(:'group_form.membership_granted_upon.approval'), 'approval'],
+       [t(:'group_form.membership_granted_upon.invitation'), 'invitation']]
     end
   end
 

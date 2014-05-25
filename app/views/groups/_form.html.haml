@@ -7,36 +7,38 @@
 
 
   = f.input :visible_to,
-            label: 'Finding the group',
+            label: t(:'group_form.visible_to.label'),
             as: :radio_buttons,
             collection: group_visibilty_options(group)
 
   = f.input :membership_granted_upon,
-            label: 'Joining the group',
+            label: t(:'group_form.membership_granted_upon.label'),
             as: :radio_buttons,
             collection: group_joining_options(group)
 
   = f.input :members_can_add_members,
-            label: 'Who can add members?',
+            label: t(:'group_form.members_can_add_members.label'),
             as: :radio_buttons,
-            collection: [['All members', true],
-                         ['Coordinators Only', false]]
+            collection: [[t(:'group_form.members_can_add_members.true'), true],
+                         [t(:'group_form.members_can_add_members.false'), false]]
 
   - if group.is_subgroup?
     = f.input :parent_members_can_see_discussions,
-              label: 'Discussion Privacy',
+              label: t(:'group_form.parent_members_can_see_discussions.label'),
               as: :radio_buttons,
-              collection: [["Anyone in #{group.parent_name} can see discussions", true],
-                           ['Only members can see discussions', false]]
+              collection: [[t(:'group_form.parent_members_can_see_discussions.true',
+                              parent_group_name: group.parent.name),
+                            true],
+                           [t(:'group_form.parent_members_can_see_discussions.false'),
+                            false]]
 
   = f.input :discussion_privacy_options,
-            label: 'Discussion Privacy',
+            label: t(:'group_form.discussion_privacy_options.label'),
             as: :radio_buttons,
-            collection: [['Allow public discussions only (visible to anyone)', 'public_only'],
-                         ['Allow public and private discussions', 'public_or_private'],
-                         ['Allow private discussions only (visible only to group members)', 'private_only']]
+            collection: [[t(:'group_form.discussion_privacy_options.public_only'), :public_only],
+                         [t(:'group_form.discussion_privacy_options.public_or_private'), :public_or_private],
+                         [t(:'group_form.discussion_privacy_options.private_only'), :private_only]]
 
   = f.input :parent_id, :as => :hidden
-  = f.submit submit_text, class: 'btn btn-info btn-large', id: 'group_form_submit', :data => { :disable_with => submit_text }
-  = f.button :button, 'Reset', :type => 'reset', :class => 'btn'
+  = f.submit submit_text, class: 'btn btn-info', id: 'group_form_submit', :data => { :disable_with => submit_text }
 
