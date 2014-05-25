@@ -51,7 +51,7 @@ module ReadableUnguessableUrlsHelper
     elsif ENV.has_key?('DEFAULT_SUBDOMAIN')
       request.subdomain != ENV['DEFAULT_SUBDOMAIN']
     else
-      !request.subdomain.blank?
+      request.subdomain.present?
     end
   end
 

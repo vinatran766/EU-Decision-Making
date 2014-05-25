@@ -126,5 +126,57 @@ describe ReadableUnguessableUrlsHelper do
       end
     end
   end
+
+  describe "group_path when no default subdomain" do
+    let(:request) { double(:request, subdomain: nil, port: 80, ssl?: false, host: 'example.com') }
+
+    before do
+      ENV.delete('DEFAULT_SUBDOMAIN')
+    end
+
+    subject { helper.group_path(group) }
+    describe "for group with no subdomain" do
+      let(:group) { create(:group, key: 'key', subdomain: nil, name: 'name') }
+
+      context "used on default subdomain", focus: true do
+        before { request.stub(:subdomain).and_return(nil) }
+        it{ should == "/g/key/name" }
+      end
+
+      context "used on custom subdomain" do
+        before { request.stub(:subdomain).and_return('custom') }
+        it{ should == "http://example.com/g/key/name" }
+      end
+    end
+
+    describe "for group with subdomain" do
+      let(:group) { create(:group, name: 'name', key: 'key', subdomain: 'custom') }
+
+      context "used on default subdomain" do
+        before { request.stub(:subdomain).and_return(nil) }
+        it{ should == "http://custom.example.com" }
+      end
+
+      context "used on custom subdomain" do
+        before { request.stub(:subdomain).and_return('custom') }
+        it{ should == "/" }
+      end
+    end
+
+    describe "for subgroup of group with subdomain" do
+      let(:parent_group) { create(:group, name: 'parent', key: 'parent_key', subdomain: 'parent-domain') }
+      let(:group) { create(:group, name: 'subgroup', key: 'key', parent: parent_group) }
+
+      context "used on default subdomain" do
+        before { request.stub(:subdomain).and_return(nil) }
+        it{ should == "http://parent-domain.example.com/g/key/parent-subgroup" }
+      end
+
+      context "used on custom subdomain" do
+        before { request.stub(:subdomain).and_return('parent-domain') }
+        it{ should == "/g/key/parent-subgroup" }
+      end
+    end
+  end
 end
 
