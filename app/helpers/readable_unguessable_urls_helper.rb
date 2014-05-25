@@ -31,6 +31,8 @@ module ReadableUnguessableUrlsHelper
       options[:subdomain] = group.subdomain
     elsif ENV['DEFAULT_SUBDOMAIN']
       options[:subdomain] = ENV['DEFAULT_SUBDOMAIN']
+    else
+      options.delete(:subdomain)
     end
 
     if group.has_subdomain? and not group.is_subgroup?
