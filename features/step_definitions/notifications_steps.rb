@@ -33,7 +33,6 @@ Given(/^a visitor has requested membership to the group$/) do
 end
 
 Then(/^I should see that the visitor requested access to the group$/) do
-  view_screenshot
   find("#notifications-container").should have_content(@membership_request.name + " " + I18n.t('notifications.membership_requested'))
 end
 
