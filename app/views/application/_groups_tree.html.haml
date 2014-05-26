@@ -1,3 +1,10 @@
+%p
+  host
+  = request.host
+%p
+  subdomain
+  = request.subdomain
+
 - member_group_ids = current_user.group_ids
 - GroupsTree.for_user(current_user).each do |group|
   - li_class = "group-item"
