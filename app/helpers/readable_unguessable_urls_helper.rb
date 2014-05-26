@@ -54,30 +54,6 @@ module ReadableUnguessableUrlsHelper
     end
   end
 
-  def debug_host_needed_to_link_to?(group)
-    if request.blank?
-      'request blank'
-    elsif group.has_subdomain?
-      if group.subdomain != request.subdomain
-        'group has subdomain different to request'
-      else
-        'group has same subdomain as request'
-      end
-    elsif ENV['DEFAULT_SUBDOMAIN'].present?
-      if request.subdomain != ENV['DEFAULT_SUBDOMAIN']
-        'request subdomain differs from default subdomain'
-      else
-        'request subdomain same as default subdomain'
-      end
-    else
-      if request.subdomain.present?
-        'request subdomain present'
-      else
-        'request subdomain blank'
-      end
-    end
-  end
-
   def group_path(group, options = {})
     url = group_url(group, options)
     if host_needed_to_link_to?(group)
