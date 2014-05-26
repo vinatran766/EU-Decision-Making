@@ -347,6 +347,26 @@ class Group < ActiveRecord::Base
     (subscription.present? && subscription.amount > 0)
   end
 
+  def group_request_description
+    group_request.try :description
+  end
+
+  def parent_or_self
+    if parent.present?
+      parent
+    else
+      self
+    end
+  end
+
+  def organisation_discussions_count
+    Group.where("parent_id = ? OR (parent_id IS NULL AND id = ?)", parent_or_self.id, parent_or_self.id).sum(:discussions_count)
+  end
+
+  def organisation_motions_count
+    Group.where("parent_id = ? OR (parent_id IS NULL AND id = ?)", parent_or_self.id, parent_or_self.id).sum(:motions_count)
+  end
+
   def has_subdomain?
     if is_subgroup?
       parent.has_subdomain?
@@ -372,6 +392,7 @@ class Group < ActiveRecord::Base
   end
 
   private
+
   def validate_parent_members_can_see_discussions
     self.errors.add(:parent_members_can_see_discussions) unless parent_members_can_see_discussions_is_valid?
   end
