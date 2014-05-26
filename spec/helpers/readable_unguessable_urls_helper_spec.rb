@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-ActionMailer::Base.default_url_options = { host: 'localhost', port: 3000 }
+ActionMailer::Base.default_url_options = { host: 'www.example.com', port: 3000 }
 
 describe ReadableUnguessableUrlsHelper do
-  let(:request) { double(:request, subdomain: nil, port: 80, ssl?: false, host: 'www.example.com') }
+  let(:request) { double(:request, subdomain: 'www', port: 80, ssl?: false, host: 'www.example.com', domain: 'example.com') }
 
   before do
     helper.stub(:request).and_return(request)
@@ -11,6 +11,14 @@ describe ReadableUnguessableUrlsHelper do
 
 
   describe "group_url" do
+    before do
+      ENV['DEFAULT_SUBDOMAIN'] = 'www'
+    end
+
+    after do
+      ENV.delete('DEFAULT_SUBDOMAIN')
+    end
+
     subject { helper.group_url(group) }
 
     describe "for group with no subdomain" do
@@ -18,7 +26,7 @@ describe ReadableUnguessableUrlsHelper do
 
       context "used within an email" do
         before { helper.stub(:request).and_return(nil) }
-        it{ should == "http://localhost:3000/g/key/name" }
+        it{ should == "http://www.example.com:3000/g/key/name" }
       end
 
       context "used on default subdomain" do
@@ -37,7 +45,7 @@ describe ReadableUnguessableUrlsHelper do
 
       context "used within an email" do
         before { helper.stub(:request).and_return(nil) }
-        it{ should == "http://custom.localhost:3000" }
+        it{ should == "http://custom.example.com:3000" }
       end
 
       context "used on default subdomain" do
@@ -57,7 +65,7 @@ describe ReadableUnguessableUrlsHelper do
 
       context "used within an email" do
         before { helper.stub(:request).and_return(nil) }
-        it{ should == "http://parent_subdomain.localhost:3000/g/key/parent-subgroup" }
+        it{ should == "http://parent_subdomain.example.com:3000/g/key/parent-subgroup" }
       end
 
       context "used on default subdomain" do
@@ -128,7 +136,7 @@ describe ReadableUnguessableUrlsHelper do
   end
 
   describe "group_path when no default subdomain" do
-    let(:request) { double(:request, subdomain: nil, port: 80, ssl?: false, host: 'example.com') }
+    let(:request) { double(:request, subdomain: nil, port: 80, ssl?: false, host: 'example.com', domain: 'example.com') }
 
     before do
       ENV.delete('DEFAULT_SUBDOMAIN')
