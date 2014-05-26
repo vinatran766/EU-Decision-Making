@@ -50,7 +50,7 @@ module ReadableUnguessableUrlsHelper
       true
     elsif group.has_subdomain?
       group.subdomain != request.subdomain
-    elsif ENV.has_key?('DEFAULT_SUBDOMAIN')
+    elsif ENV['DEFAULT_SUBDOMAIN'].present?
       request.subdomain != ENV['DEFAULT_SUBDOMAIN']
     else
       request.subdomain.present?
