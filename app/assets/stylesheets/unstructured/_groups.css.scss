@@ -189,7 +189,24 @@ body.group_setup.setup, body.groups.new, body.groups.edit, body.groups.add_subgr
       line-height: 32px;
       margin-bottom: .6em;
     }
-    label { font-size: 18px; }
+
+    label span:before { content: '- '; }
+    label.radio {
+      /*margin-bottom: .5em;*/
+      /*font-weight: 500;*/
+    }
+    label.radio span {
+      font-style: italic;
+      /*font-size: 0.85em;*/
+      /*display: block;*/
+      font-weight: normal;
+      /*color: $mid-grey;*/
+    }
+
+    /*label.disabled span{*/
+      /*[>display: block;<]*/
+      /*color: $lighter-grey;*/
+    /*}*/
     textarea {
       @include placeholder { font-style: italic; }
       font-size: 16px;

@@ -253,18 +253,18 @@ en:
   group_form:
     visible_to:
       label: Who can find this group?
-      public: 'Anyone - list the group publicly'
-      parent_members: 'Members of %{parent_group_name} can find the group'
-      members: 'Members only - the group will not be listed'
+      public_html: 'Anyone <span>list the group publicly</span>'
+      parent_members_html: 'Members of %{parent_group_name} <span>Members of the parent group can find this subgroup</span>'
+      members_html: 'Members only <span>the group will not be listed</span>'
 
     membership_granted_upon:
       label: How do people join?
       hidden_parent:
-        request: 'Open - to members of %{parent_group_name}'
-        approval: 'By request - from members of %{parent_group_name}'
-      request: Open - anyone can join the group
-      approval: By request - anyone can request to join
-      invitation: Invitation only - new members must be invited
+        request_html: 'Open <span>to members of %{parent_group_name}</span>'
+        approval_html: 'By request <span>from members of %{parent_group_name}</span>'
+      request_html: Open <span>anyone can join the group</span>
+      approval_html: By request <span>anyone can request to join</span>
+      invitation_html: Invitation only <span>new members must be invited</span>
 
     members_can_add_members:
       label: Who can add members?
@@ -278,9 +278,9 @@ en:
 
     discussion_privacy_options:
       label: Discussion privacy
-      public_only: Public discussions only - visible to anyone
-      public_or_private: Allow public and private discussions
-      private_only: Private discussions only - visible only to group members
+      public_only_html: Public discussions only <span>visible to anyone</span>
+      public_or_private_html: Allow public and private discussions <span>set the discussion privacy per discussion</span>
+      private_only_html: Private discussions only <span>visible only to group members</span>
 
 
   setup_steps_title: "Next steps:"

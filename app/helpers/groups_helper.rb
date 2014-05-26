@@ -3,33 +3,33 @@ module GroupsHelper
     options = []
 
     unless group.is_subgroup_of_hidden_parent?
-      options << [t(:'group_form.visible_to.public'), 'public']
+      options << [t(:'group_form.visible_to.public_html'), 'public']
     end
 
     if group.is_subgroup?
-      options << [t(:'group_form.visible_to.parent_members', parent_group_name: group.parent.name ),
+      options << [t(:'group_form.visible_to.parent_members_html', parent_group_name: group.parent.name ),
                   "parent_members"]
     end
 
-    options << [t(:'group_form.visible_to.members'), "members"]
+    options << [t(:'group_form.visible_to.members_html'), "members"]
 
     options
   end
 
   def group_joining_options(group)
     if group.is_subgroup_of_hidden_parent?
-      [[t(:'group_form.membership_granted_upon.hidden_parent.request',
+      [[t(:'group_form.membership_granted_upon.hidden_parent.request_html',
           parent_group_name: group.parent.name),
         'request'],
-       [t(:'group_form.membership_granted_upon.hidden_parent.approval',
+       [t(:'group_form.membership_granted_upon.hidden_parent.approval_html',
           parent_group_name: group.parent.name),
         'approval'],
-       [t(:'group_form.membership_granted_upon.invitation'),
+       [t(:'group_form.membership_granted_upon.invitation_html'),
         'invitation']]
     else
-      [[t(:'group_form.membership_granted_upon.request'), 'request'],
-       [t(:'group_form.membership_granted_upon.approval'), 'approval'],
-       [t(:'group_form.membership_granted_upon.invitation'), 'invitation']]
+      [[t(:'group_form.membership_granted_upon.request_html'), 'request'],
+       [t(:'group_form.membership_granted_upon.approval_html'), 'approval'],
+       [t(:'group_form.membership_granted_upon.invitation_html'), 'invitation']]
     end
   end
 
