@@ -1,12 +1,17 @@
 require 'spec_helper'
 
-ActionMailer::Base.default_url_options = { host: 'www.example.com', port: 3000 }
 
 describe ReadableUnguessableUrlsHelper do
   let(:request) { double(:request, subdomain: 'www', port: 80, ssl?: false, host: 'www.example.com', domain: 'example.com') }
 
   before do
+    @old_action_mailer_default_url_options = ActionMailer::Base.default_url_options
+    ActionMailer::Base.default_url_options = { host: 'www.example.com', port: 3000 }
     helper.stub(:request).and_return(request)
+  end
+
+  after do
+    ActionMailer::Base.default_url_options = @old_action_mailer_default_url_options
   end
 
 
