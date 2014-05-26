@@ -31,9 +31,6 @@ module ReadableUnguessableUrlsHelper
       options[:subdomain] = group.subdomain
     elsif ENV['DEFAULT_SUBDOMAIN']
       options[:subdomain] = ENV['DEFAULT_SUBDOMAIN']
-    else
-      #options.delete(:subdomain)
-      options[:subdomain] = ''
     end
 
     if group.has_subdomain? and not group.is_subgroup?
@@ -100,9 +97,9 @@ module ReadableUnguessableUrlsHelper
   def host_and_port
     if request.present?
       if include_port?(request)
-        { host: request.host, port: request.port }
+        { host: request.domain, port: request.port }
       else
-        { host: request.host, port: nil }
+        { host: request.domain, port: nil }
       end
     else
       ActionMailer::Base.default_url_options
