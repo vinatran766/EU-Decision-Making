@@ -253,18 +253,18 @@ en:
   group_form:
     visible_to:
       label: Who can find this group?
-      public: 'Anyone (list the group publicly)'
+      public: 'Anyone - list the group publicly'
       parent_members: 'Members of %{parent_group_name} can find the group'
-      members: 'Members only (the group will not be listed)'
+      members: 'Members only - the group will not be listed'
 
     membership_granted_upon:
       label: How do people join?
       hidden_parent:
-        request: 'Anyone in %{parent_group_name} can join'
-        approval: 'Anyone in %{parent_group_name} can request to join'
-      request: Anyone can join the group
-      approval: Anyone can request to join
-      invitation: Joining is by invitation only
+        request: 'Open - to members of %{parent_group_name}'
+        approval: 'By request - from members of %{parent_group_name}'
+      request: Open - anyone can join the group
+      approval: By request - anyone can request to join
+      invitation: Invitation only - new members must be invited
 
     members_can_add_members:
       label: Who can add members?
@@ -278,9 +278,9 @@ en:
 
     discussion_privacy_options:
       label: Discussion privacy
-      public_only: Public discussions only (visible to anyone)
+      public_only: Public discussions only - visible to anyone
       public_or_private: Allow public and private discussions
-      private_only: Private discussions only (visible only to group members)
+      private_only: Private discussions only - visible only to group members
 
 
   setup_steps_title: "Next steps:"
