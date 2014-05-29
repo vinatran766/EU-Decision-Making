@@ -28,6 +28,15 @@ class Ability
       end
     end
 
+    can :see_private_content, Group do |group|
+      if group.is_archived?
+        false
+      else
+        user_is_member_of?(group.id) or
+        (group.is_visible_to_parent_members? and user_is_member_of?(group.parent_id))
+      end
+    end
+
     can [:view_payment_details,
          :choose_subscription_plan], Group do |group|
       group.is_parent? and user_is_admin_of?(group.id) and (!group.has_manual_subscription?)
@@ -36,13 +45,13 @@ class Ability
     can [:update,
          :email_members,
          :hide_next_steps,
+         :edit_description,
          :archive], Group do |group|
       user_is_admin_of?(group.id)
     end
 
     can [:add_subgroup,
-        :edit_description,
-        :members_autocomplete], Group do |group|
+         :members_autocomplete], Group do |group|
       user_is_member_of?(group.id)
     end
 

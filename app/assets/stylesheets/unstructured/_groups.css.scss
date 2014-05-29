@@ -125,6 +125,10 @@ body.groups {
   }
 }
 
+#group-actions{
+  margin-bottom: 20px;
+}
+
 #group_email_subject { width: 510px; }
 #group_email_body { width: 510px; }
 
@@ -181,7 +185,7 @@ body.groups {
 }
 
 body.group_setup.setup, body.groups.new, body.groups.edit, body.groups.add_subgroup {
-  form.edit_group, form.new_group {
+  form.group-settings {
     .control-group.radio_buttons { margin-bottom: 1.6em; }
     input[type="text"] {
       font-size: 28px;

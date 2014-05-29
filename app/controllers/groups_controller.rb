@@ -52,9 +52,15 @@ class GroupsController < GroupBaseController
 
   def update
     if @group.update_attributes(permitted_params.group)
+
       if @group.private_discussions_only?
         @group.discussions.update_all(private: true)
       end
+
+      if @group.public_discussions_only?
+        @group.discussions.update_all(private: false)
+      end
+
       Measurement.increment('groups.update.success')
       flash[:notice] = 'Group was successfully updated.'
       redirect_to @group
@@ -68,16 +74,12 @@ class GroupsController < GroupBaseController
     @group = GroupDecorator.new @group
     @subgroups = @group.subgroups.all.select{|g| can?(:show, g) }
     @discussion = Discussion.new(group_id: @group.id)
-    @discussions_with_open_motions = GroupDiscussionsViewer.for(group: @group, user: current_user).
-                                                            with_open_motions.
-                                                            order('motions.closing_at ASC').
-                                                            preload({:current_motion => :discussion}, {:group => :parent})
 
-    @discussions_without_open_motions = GroupDiscussionsViewer.for(group: @group, user: current_user).
-                                                            without_open_motions.
-                                                            order('last_comment_at DESC').
-                                                            preload(:current_motion, {:group => :parent}).
-                                                            page(params[:page]).per(20)
+    @discussions = GroupDiscussionsViewer.for(group: @group, user: current_user).
+                                          joined_to_current_motion.
+                                          preload(:current_motion, {:group => :parent}).
+                                          order('motions.closing_at ASC, last_comment_at DESC').
+                                          page(params[:page]).per(20)
 
     @closed_motions = Queries::VisibleMotions.new(user: current_user, groups: @group).order('closed_at desc')
 

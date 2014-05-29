@@ -251,10 +251,13 @@ en:
   # GROUP PAGE
   #
   group_form:
+    confirm_all_discussions_will_be_made_private_message: "If you proceed, any public discussions will be made private."
+    confirm_all_discussions_will_be_made_public_message: "Are you sure? If you proceed, any private discussions will be made public."
+
     visible_to:
       label: Who can find this group?
       public_html: 'Anyone <span>list the group publicly</span>'
-      parent_members_html: 'Members of %{parent_group_name} <span>Members of the parent group can find this subgroup</span>'
+      parent_members_html: 'People in %{parent_group_name} <span>unlisted to the public, but visible to members of %{parent_group_name}</span>'
       members_html: 'Members only <span>the group will not be listed</span>'
 
     membership_granted_upon:
@@ -405,9 +408,17 @@ en:
   empty_decision_list_html: "Ready to make a decision? <br> Anyone can start a proposal."
   empty_decision_index: "This group has not made any decisions yet."
   empty_discussion_list: "There is no activity in this discussion yet."
-  empty_discussion_index: "There are no discussions in any of your groups."
-  empty_discussion_index_group: "This group does not have any discussions yet."
-  private_group_discussion_display: "This group is private. The discussions are only visible to members. If you'd like to participate, you can ask to join."
+
+  discussion_list:
+    empty:
+      no_discussions: "There are no discussions in any of your groups."
+      no_discussions_in_group: "This group does not have any discussions yet."
+      no_public_discussions: "There are no public disscussions in this group."
+      discussions_are_private: "All discussions in this group are private."
+      request_membership_html: "To see private discussions, <a href='%{href}'>request to join the group.</a>"
+      membership_is_invitation_only: "To join this group you need to be invited by a member."
+      membership_is_invitation_by_admin_only: "To join this group you need to be invited by a coordinator."
+      log_in_html: "If you are a member, <a href='%{href}'>log in</a> to see any private discussions."
 
   discussion_context:
     started_html: "Started %{when} ago by <a href='%{link}' class='%{link_class}'>%{who}</a>"

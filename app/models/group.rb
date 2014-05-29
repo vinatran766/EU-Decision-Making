@@ -9,8 +9,9 @@ class Group < ActiveRecord::Base
   #even though we have permitted_params this needs to be here.. it's an issue
   attr_accessible :name, :members_can_add_members, :parent, :parent_id, :description, :max_size,
                   :cannot_contribute, :full_name, :payment_plan, :parent_members_can_see_discussions,
-                  :category_id, :max_size, :is_visible_to_parent_members, :is_visible_to_public, :discussion_privacy_options,
-                  :visible_to, :theme_id, :subdomain
+                  :category_id, :max_size, :is_visible_to_parent_members, :is_visible_to_public,
+                  :discussion_privacy_options, :membership_granted_upon, :visible_to,
+                  :theme_id, :subdomain
   acts_as_tree
 
   PAYMENT_PLANS = ['pwyc', 'subscription', 'manual_subscription', 'undetermined']
@@ -27,6 +28,7 @@ class Group < ActiveRecord::Base
   validate :limit_inheritance
   validate :validate_parent_members_can_see_discussions
   validate :validate_is_visible_to_parent_members
+  validate :validate_discussion_privacy_options
 
   before_save :update_full_name_if_name_changed
 
@@ -197,6 +199,8 @@ class Group < ActiveRecord::Base
     when 'members'
       self.is_visible_to_public = false
       self.is_visible_to_parent_members = false
+      self.discussion_privacy_options = 'private_only'
+      self.membership_granted_upon = 'invitation'
     else
       raise "visible_to term not recognised: #{term}"
     end
@@ -254,6 +258,10 @@ class Group < ActiveRecord::Base
 
   def public_discussions_only?
     discussion_privacy_options == 'public_only'
+  end
+  
+  def public_or_private_discussions_allowed?
+    discussion_privacy_options == 'public_or_private'
   end
 
   def discussion_private_default
@@ -392,6 +400,16 @@ class Group < ActiveRecord::Base
   end
 
   private
+
+  def validate_discussion_privacy_options
+    if membership_granted_upon_request? and not public_discussions_only?
+      self.errors.add(:discussion_privacy_options, "Discussions must be public if group is open")
+    end
+
+    if is_hidden_from_public? and not private_discussions_only?
+      self.errors.add(:discussion_privacy_options, "Discussions must be private if group is hidden")
+    end
+  end
 
   def validate_parent_members_can_see_discussions
     self.errors.add(:parent_members_can_see_discussions) unless parent_members_can_see_discussions_is_valid?

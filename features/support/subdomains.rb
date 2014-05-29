@@ -12,10 +12,10 @@ def switch_to_main_domain
   switch_to_subdomain nil
 end
  
-RSpec.configure do |config|
-  switch_to_main_domain
-end
+#RSpec.configure do |config|
+  #switch_to_main_domain
+#end
  
-Capybara.configure do |config|
-  config.always_include_port = true
-end
+#Capybara.configure do |config|
+  #config.always_include_port = true
+#end

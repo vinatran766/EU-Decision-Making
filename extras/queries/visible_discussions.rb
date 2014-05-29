@@ -8,9 +8,6 @@ class Queries::VisibleDiscussions < Delegator
 
     @relation = Discussion.joins(:group).merge(Group.published).published
 
-    if @user.present?
-      @relation = @relation.joins("LEFT OUTER JOIN discussion_readers dv ON dv.discussion_id = discussions.id AND dv.user_id = #{@user.id}")
-    end
 
     @relation = self.class.apply_privacy_sql(user: @user, group_ids: group_ids, relation: @relation)
 
@@ -26,6 +23,7 @@ class Queries::VisibleDiscussions < Delegator
   end
 
   def unread
+    @relation = @relation.joins("LEFT OUTER JOIN discussion_readers dv ON dv.discussion_id = discussions.id AND dv.user_id = #{@user.id}")
     @relation = @relation.where('(dv.last_read_at < discussions.last_comment_at) OR dv.last_read_at IS NULL')
     self
   end

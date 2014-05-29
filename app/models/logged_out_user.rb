@@ -21,7 +21,7 @@ class LoggedOutUser
     nil
   end
 
-  def is_group_member?(group)
+  def is_member_of?(group)
     false
   end
 
