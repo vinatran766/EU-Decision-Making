@@ -83,7 +83,6 @@ Given(/^I am editing the settings for a subgroup$/) do
 end
 
 When(/^I select visible to parent group members and save$/) do
-  view_screenshot
   choose 'group_visible_to_parent_members'
   click_on 'group_form_submit'
 end
