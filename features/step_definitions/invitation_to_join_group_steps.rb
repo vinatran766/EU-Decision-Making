@@ -156,7 +156,7 @@ When /^I visit the subgroup page$/ do
 end
 
 When /^I click invite people$/ do
-  find("#button-container").find("#invite-new-members").click
+  find("#group-actions").find("#invite-new-members").click
 end
 
 When /^I select "(.*?)" from the list of members$/ do |arg1|

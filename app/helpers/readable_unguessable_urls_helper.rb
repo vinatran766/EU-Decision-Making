@@ -26,7 +26,6 @@ module ReadableUnguessableUrlsHelper
   def group_url(group, options = {})
     options = options.merge( host_and_port ).
                       merge( route_hash(group, 'group') )
-
     if group.has_subdomain?
       options[:subdomain] = group.subdomain
     elsif ENV['DEFAULT_SUBDOMAIN']
@@ -40,6 +39,8 @@ module ReadableUnguessableUrlsHelper
     else
       url_for(options)
     end
+  rescue
+    raise [ActionMailer::Base.default_url_options, host_and_port, options].inspect
   end
 
   def host_needed_to_link_to?(group)
@@ -72,10 +73,11 @@ module ReadableUnguessableUrlsHelper
 
   def host_and_port
     if request.present?
+      host = request.domain || request.host
       if include_port?(request)
-        { host: request.domain, port: request.port }
+        { host: host, port: request.port }
       else
-        { host: request.domain, port: nil }
+        { host: host, port: nil }
       end
     else
       ActionMailer::Base.default_url_options

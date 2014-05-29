@@ -41,7 +41,7 @@ class GroupsController < GroupBaseController
         render 'groups/add_subgroup'
     else
       Measurement.increment('groups.create.error')
-      render 'form'
+      render 'new'
     end
   end
 
