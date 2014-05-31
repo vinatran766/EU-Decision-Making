@@ -104,3 +104,21 @@ Then(/^the group name and description should be changed$/) do
   @group.description.should == 'changed'
 end
 
+
+Given(/^the group has a public discussion$/) do
+  @discussion = FactoryGirl.create(:discussion, private: false, group: @group)
+end
+
+When(/^I change the group to private discussions only$/) do
+  choose 'group_discussion_privacy_options_private_only'
+  click_on 'group_form_submit'
+end
+
+Then(/^I should have to confirm making discussions private$/) do
+  # these are ignored..
+end
+
+Then(/^the discussion should be private$/) do
+  @discussion.reload
+  @discussion.should be_private
+end
