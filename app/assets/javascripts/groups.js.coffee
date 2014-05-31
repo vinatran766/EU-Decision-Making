@@ -84,10 +84,10 @@ update_group_form_state = ->
     set_private_discussions_only()
 
 previously_allowed_private_discussions = ->
-  $('form.group-settings').data('previous_discussion_privacy_options') != 'public_only'
+  $('form.group-settings').data().previousDiscussionPrivacyOptions != 'public_only'
 
 previously_allowed_public_discussions = ->
-  $('form.group-settings').data('previous_discussion_privacy_options') != 'private_only'
+  $('form.group-settings').data().previousDiscussionPrivacyOptions != 'private_only'
 
 all_discussions_will_be_made_public = ->
   previously_allowed_private_discussions() and
