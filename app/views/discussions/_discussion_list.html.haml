@@ -1,9 +1,13 @@
 %section.span9#group-discussions
   - if @discussions.any?
-    %ul.selector-list.bordered
-      #discussion-list
-        - @discussions.each do |discussion|
+    - discussions_with_motions = @discussions.select(&:current_motion)
+    - if discussions_with_motions.any?
+      %ul.selector-list.bordered#discussions-with-motions
+        - discussions_with_motions.each do |discussion|
           %li.selector-item= render '/discussions/discussion_preview', discussion: discussion
+    %ul.selector-list.bordered#discussions-without-motions
+      - @discussions.select{|d| d.current_motion.nil? }.each do |discussion|
+        %li.selector-item= render '/discussions/discussion_preview', discussion: discussion
 
     = paginate @discussions, :window => 3
 
