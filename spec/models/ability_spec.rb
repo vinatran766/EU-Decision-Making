@@ -169,7 +169,6 @@ describe "User abilities" do
     it { should     be_able_to(:new_proposal, discussion) }
     it { should     be_able_to(:add_comment, discussion) }
     it { should     be_able_to(:update_description, discussion) }
-    it { should     be_able_to(:edit_description, group) }
     it { should     be_able_to(:show_description_history, discussion) }
     it { should     be_able_to(:preview_version, discussion) }
     it { should     be_able_to(:update_version, discussion) }
@@ -266,6 +265,7 @@ describe "User abilities" do
     it { should     be_able_to(:destroy, another_user_comment) }
     it { should     be_able_to(:cancel, own_invitation) }
     it { should     be_able_to(:cancel, other_members_invitation) }
+    it { should     be_able_to(:edit_description, group) }
 
     it "should not be able to delete the only admin of a group" do
       group.admin_memberships.where("memberships.id != ?", @membership.id).destroy_all

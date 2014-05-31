@@ -285,6 +285,15 @@ en:
       public_or_private_html: Allow public and private discussions <span>set the discussion privacy per discussion</span>
       private_only_html: Private discussions only <span>visible only to group members</span>
 
+  group_privacy:
+    visible_to:
+      public: Publicly listed group.
+      parent_members: 'Privately listed group. Only visible to members and people in %{parent_group_name}.'
+      members: Hidden group. Only visible to members.
+
+      public_html: 'Anyone <span>list the group publicly</span>'
+      parent_members_html: 'People in %{parent_group_name} <span>unlisted to the public, but visible to members of %{parent_group_name}</span>'
+      members_html: 'Members only <span>the group will not be listed</span>'
 
   setup_steps_title: "Next steps:"
   setup_step_1: "Check out the example discussion"

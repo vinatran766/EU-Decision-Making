@@ -1,5 +1,5 @@
 $ ->
-  $("#privacy").tooltip
+  $('.title-tooltip').tooltip
     placement: "right"
 
 # adds bootstrap popovers to group activity indicators

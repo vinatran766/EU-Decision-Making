@@ -31,6 +31,7 @@ class Group < ActiveRecord::Base
   validate :validate_discussion_privacy_options
 
   before_save :update_full_name_if_name_changed
+  before_validation :set_discussions_private_only, if: :is_hidden_from_public?
 
   include PgSearch
   pg_search_scope :search_full_name, against: [:name, :description],
@@ -400,6 +401,9 @@ class Group < ActiveRecord::Base
   end
 
   private
+  def set_discussions_private_only
+    self.discussion_privacy_options = 'private_only'
+  end
 
   def validate_discussion_privacy_options
     if membership_granted_upon_request? and not public_discussions_only?
