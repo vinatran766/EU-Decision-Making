@@ -113,3 +113,13 @@ $ ->
 
   # and when the dom loads
   update_group_form_state()
+
+show_edit_link = ->
+  $('.edit-group-link').show()
+
+hide_edit_link = ->
+  $('.edit-group-link').hide()
+
+$ ->
+  hide_edit_link()
+  $('.group-heading').hover(show_edit_link, hide_edit_link)

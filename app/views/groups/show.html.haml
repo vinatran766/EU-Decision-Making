@@ -1,10 +1,14 @@
 .row
   .span9
     .group-heading
+      .edit-group-link
+        =link_to edit_group_path(@group) do
+          %i.fa.fa-pencil
+          = t :edit
       - set_title @group.name, "", @group.parent
       = render '/groups/title', group: @group, discussion: @discussion
-    .group-description
-      ~ render_rich_text(@group.description)
+      .group-description
+        ~ render_rich_text(@group.description)
 
     .row
       .main-content

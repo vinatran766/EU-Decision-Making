@@ -10,26 +10,9 @@ body.groups {
   &.show {
     .discussion-preview .discussion-title { margin-top: 7px; }
     .discussion-preview.showing-group .discussion-title { margin-top: 0; }
-    #group-description-panel {
-      #description-edit-form {
-        margin-bottom: 0px;
-        #description-input {
-          width: 184px;
-          height: 90px;
-          margin-bottom: 2px;
-        }
-        .character-counter {
-          width: 196px;
-          top: 0;
-        }
-        .dropdown-menu a {
-          padding-left: 5px;
-        }
-        form {
-          margin: 0;
-          display: inline;
-        }
-      }
+    .edit-group-link {
+      float: right;
+      padding: 10px;
     }
     .group-options {
       width: 200px;
