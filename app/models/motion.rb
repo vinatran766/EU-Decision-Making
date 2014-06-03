@@ -248,7 +248,9 @@ class Motion < ActiveRecord::Base
     end
 
     def set_default_close_at_date_and_time
-      self.closing_at ||= Time.zone.now + 3.days
+      if self.close_at_date.blank?
+        self.closing_at ||= Time.zone.now + 3.days
+      end
     end
 
     def set_closing_at
