@@ -205,6 +205,7 @@ Loomio::Application.routes.draw do
       get :privacy
       get :purpose
       get :services
+      get :store
       get :terms_of_service
       get :third_parties
       get :try_it
@@ -218,6 +219,7 @@ Loomio::Application.routes.draw do
     match '/privacy' => redirect('https://www.loomio.org/privacy')
     match '/purpose' => redirect('https://www.loomio.org/purpose')
     match '/services' => redirect('https://www.loomio.org/services')
+    match '/store' => redirect('https://www.loomio.org/store')
     match '/terms_of_service' => redirect('https://www.loomio.org/terms_of_service')
     match '/third_parties' => redirect('https://www.loomio.org/third_parties')
     match '/try_it' => redirect('https://www.loomio.org/try_it')

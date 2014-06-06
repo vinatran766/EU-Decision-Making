@@ -112,6 +112,7 @@ a.btn-icon:hover { color: $dark-grey; }
 .pages.blog,
 .pages.privacy,
 .pages.services,
+.pages.store,
 .pages.terms_of_service,
 .pages.third_parties,
 .pages.try_it,
@@ -333,7 +334,15 @@ a.btn-icon:hover { color: $dark-grey; }
   }
 }
 $package-color: #51BD9E;
-.pages.services{
+.pages.store .package p{
+  font-size: 16px;
+  text-align: left;
+  code{
+    display: block;
+    color: black;
+  }
+}
+.pages.services, .pages.store{
   body, h1, h2, h3, h4, h5, p, div {
     font-family: 'OpenSans', sans-serif;
     font-weight: 400;
