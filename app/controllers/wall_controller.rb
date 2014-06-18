@@ -6,7 +6,7 @@ class WallController < BaseController
 
     # TODO UNDO CHANGES TO THIS FILE
     groups = current_user.inbox_groups
-    @time_since = 11.days.ago
+    @time_since = 3.days.ago
 
     @discussions_by_group = Queries::VisibleDiscussions.new(user: current_user,
                                                             groups: groups).
