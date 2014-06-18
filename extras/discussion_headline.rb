@@ -1,4 +1,5 @@
 class DiscussionHeadline
+  include Routing
   attr_accessor :discussion
   attr_accessor :time_frame
 
@@ -11,20 +12,20 @@ class DiscussionHeadline
     if new_discussion?
       case participants.size
       when 1
-        "#{participants.first.name} started a discussion: #{discussion.title}"
+        "#{participants.first.name} started a discussion: #{linked_discussion_title(discussion)}"
       when 2
-        "#{participants.first.name} and #{participants.second.name} started discussing: #{discussion.title}"
+        "#{participants.first.name} and #{participants.second.name} started discussing: #{linked_discussion_title(discussion)}"
       else
-        "#{participants.first.name} and #{participants.size - 1} others started discussing: #{discussion.title}"
+        "#{participants.first.name} and #{participants.size - 1} others started discussing: #{linked_discussion_title(discussion)}"
       end
     else
       case participants.size
       when 1
-        "#{participants.first.name} discussed: #{discussion.title}"
+        "#{participants.first.name} discussed: #{linked_discussion_title(discussion)}"
       when 2
-        "#{participants.first.name} and #{participants.second.name} discussed: #{discussion.title}"
+        "#{participants.first.name} and #{participants.second.name} discussed: #{linked_discussion_title(discussion)}"
       else
-        "#{participants.first.name} and #{participants.size - 1} others discussed: #{discussion.title}"
+        "#{participants.first.name} and #{participants.size - 1} others discussed: #{linked_discussion_title(discussion)}"
       end
     end
   end
@@ -52,7 +53,15 @@ class DiscussionHeadline
   end
 
   def render
-    "#{discussion_synopsis} and #{motion_synopsis}"
+    if motion_synopsis.present?
+      "#{discussion_synopsis} and #{motion_synopsis}".html_safe
+    else
+      discussion_synopsis.html_safe
+    end
+  end
+
+  def linked_discussion_title(discussion)
+    ActionController::Base.helpers.link_to(discussion.title, "##{discussion.key}").html_safe
   end
 
   def new_motion?
