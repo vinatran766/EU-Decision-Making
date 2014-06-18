@@ -25,7 +25,7 @@ class UserMailer < BaseMailer
       I18n.with_locale(locale) do
         mail to: user.email,
              subject: t("email.missed_yesterday.subject"),
-             css: ['email', 'missed_yesterday']
+             css: 'missed_yesterday'
       end
     end
   end

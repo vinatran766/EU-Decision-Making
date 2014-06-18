@@ -3,16 +3,18 @@
   - if discussion.created_at >= @time_since
     %p
       %em by #{discussion.author.name}
-    - if discussion.uses_markdown?
-      = render_email_markdown discussion.description
-    - else
-      = render_email_plaintext discussion.description
+    .description
+      - if discussion.uses_markdown?
+        = render_email_markdown discussion.description
+      - else
+        = render_email_plaintext discussion.description
 
   - if motion = discussion.motions.voting_or_closed_after(@time_since).first
     = render 'user_mailer/missed_yesterday/motion', motion: motion
 
-  - discussion.items.where('created_at > ?', @time_since).order('created_at').each do |item|
-    - next unless ['new_comment', 'new_vote', 'motion_closed', 'motion_closed_by_user'].include? item.kind
-    = render "user_mailer/missed_yesterday/#{item.kind}", item: item
+  .activity-feed
+    - discussion.items.where('created_at > ?', @time_since).order('created_at').each do |item|
+      - next unless ['new_comment', 'new_vote', 'motion_closed', 'motion_closed_by_user'].include? item.kind
+      = render "user_mailer/missed_yesterday/#{item.kind}", item: item
 
   %p= link_to t(:"email.reply_to_this_discussion"), discussion_url(discussion)
