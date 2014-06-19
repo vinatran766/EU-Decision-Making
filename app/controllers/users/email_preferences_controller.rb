@@ -20,9 +20,10 @@ class Users::EmailPreferencesController < BaseController
   def mark_summary_email_as_read
     @inbox = Inbox.new(user)
     @inbox.load
-    time = Time.at params[:email_timestamp].to_i
+    time = Time.at(params[:email_timestamp].to_i).utc
     @inbox.clear_all_in_group(user.inbox_groups, time)
-    redirect_to inbox_path
+    flash[:notice] = I18n.t "email.missed_yesterday.marked_as_read_success"
+    redirect_to dashboard_or_root_path
   end
 
   private

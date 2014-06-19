@@ -15,6 +15,7 @@ module EmailHelper
   end
 
   def mark_summary_as_read_url_for(user)
-    mark_summary_email_as_read_url(unsubscribe_token: user.unsubscribe_token, email_timestamp: Time.now.to_i)
+    mark_summary_email_as_read_url(unsubscribe_token: user.unsubscribe_token,
+                                   email_timestamp: Time.now.utc.to_i)
   end
 end
