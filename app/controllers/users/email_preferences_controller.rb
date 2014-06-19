@@ -17,7 +17,19 @@ class Users::EmailPreferencesController < BaseController
     end
   end
 
+  def mark_summary_email_as_read
+    @inbox = Inbox.new(user)
+    @inbox.load
+
+    @inbox.clear_all_in_group(user.inbox_groups, params[:email_created_at])
+    redirect_to inbox_path
+  end
+
   private
+
+  def user
+    @restricted_user || current_user
+  end
 
   def resource
     @email_preferences ||= EmailPreferences.new(@restricted_user || current_user)
