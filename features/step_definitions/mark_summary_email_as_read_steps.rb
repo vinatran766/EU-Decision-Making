@@ -11,7 +11,7 @@ end
 
 When(/^I mark the email as read$/) do
   visit mark_summary_email_as_read_path(
-    email_created_at: 1.hour.from_now,
+    email_timestamp: 1.hour.from_now.to_i,
     unsubscribe_token: @user.unsubscribe_token
   )
 end

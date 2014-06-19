@@ -20,8 +20,8 @@ class Users::EmailPreferencesController < BaseController
   def mark_summary_email_as_read
     @inbox = Inbox.new(user)
     @inbox.load
-
-    @inbox.clear_all_in_group(user.inbox_groups, params[:email_created_at])
+    time = Time.at params[:email_timestamp].to_i
+    @inbox.clear_all_in_group(user.inbox_groups, time)
     redirect_to inbox_path
   end
 
