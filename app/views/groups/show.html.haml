@@ -35,6 +35,12 @@
 .row
   .span9
     .group-description
+      / %a.btn.btn-primary
+      /   Join group
+
+      %a.btn.btn-info
+        Following
+
       - if (can? :edit, @group) && @group.description.present?
         = link_to edit_group_path @group do
           .edit-icon.edit-description{'data-title' => t(:'tooltip.edit_description')}
@@ -53,8 +59,18 @@
         = render 'invite_button', group: @group, discussion: @discussion
       = render 'options_dropdown', group: @group
 
-      = join_group_button(@group)
     = render 'setup_next_steps' if show_next_steps?(@group)
+    .sub-panel
+      %h4 Notifications
+      %p
+        / %small
+        /   You're receiving notifications for discussions you're participating in.
+        / %a.btn.btn-block.btn-small
+        /   Subscribe to all discussions
+        %small
+          You're receiving notifications for all discussions in this group.
+        %a.btn.btn-block
+          Unsubscribe
 
     = render 'subgroups', group: @group
 
